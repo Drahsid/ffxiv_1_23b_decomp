@@ -1,0 +1,20 @@
+[submodule "third_party/zlib"]
+	path = third_party/zlib
+	url = https://github.com/madler/zlib
+	shallow = true
+[submodule "third_party/lua"]
+	path = third_party/lua
+	url = https://github.com/LuaDist/lua
+	shallow = true
+[submodule "third_party/openssl"]
+	path = third_party/openssl
+	url = https://github.com/openssl/openssl
+	shallow = true
+	ignore = dirty
+[submodule "tools/splat"]
+	path = tools/splat
+	url = https://github.com/Drahsid/splat.git
+	branch = win32
+[submodule "tools/msvc8.0sp1"]
+	path = tools/msvc8.0sp1
+	url = https://github.com/Drahsid/ffxiv_msvc8.0sp1

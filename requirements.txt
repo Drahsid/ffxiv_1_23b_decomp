@@ -1,0 +1,4 @@
+-e ./tools/splat[mips,win32]
+iced-x86==1.21.0
+ninja_syntax==1.7.2
+asm-differ @ git+https://github.com/simonlindholm/asm-differ.git

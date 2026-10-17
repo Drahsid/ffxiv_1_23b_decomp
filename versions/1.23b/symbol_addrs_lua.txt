@@ -1,0 +1,7 @@
+?luaD_throw@@YAXPAUlua_State@@H@Z = 0x00DCF9C0; // type:func
+?luaG_runerror@@YAXPAUlua_State@@PBDZZ = 0x00DD1EF0; // type:func
+?luaS_newlstr@@YAPATTString@@PAUlua_State@@PBDI@Z = 0x00DD24E0; // type:func
+?luaH_getstr@@YAPBUlua_TValue@@PAUTable@@PATTString@@@Z = 0x00DD4810; // type:func
+?luaC_link@@YAXPAUlua_State@@PATGCObject@@E@Z = 0x00DD5FB0; // type:func
+?luaC_linkupval@@YAXPAUlua_State@@PAUUpVal@@@Z = 0x00DD5FE0; // type:func
+?luaO_nilobject_@@3Ulua_TValue@@B = 0x01133268; // type:u8 size:0x10 can_reference:false

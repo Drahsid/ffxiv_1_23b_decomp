@@ -1,0 +1,5 @@
+* text=auto eol=lf
+tools/msvc8.0sp1/** -text eol=crlf
+src/**/*.cpp text working-tree-encoding=CP932 eol=crlf
+include/**/*.h text working-tree-encoding=CP932 eol=crlf
+

@@ -1,0 +1,15 @@
+__pycache__/
+.ruff_cache/
+.venv/
+.splache
+*.exe
+
+/asm/
+/assets/
+/build/
+/third_party/crt/
+/third_party/dxsdk/
+
+build.ninja
+objdiff.json
+.ninja*

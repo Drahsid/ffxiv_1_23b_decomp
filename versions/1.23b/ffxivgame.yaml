@@ -1,0 +1,695 @@
+name: ffxivgame.exe (1.23b)
+sha1: 04fd1c65eb0ab2e5d37d814dac1298ae2940e86a
+options:
+  basename: ffxivgame
+  target_path: versions/1.23b/ffxivgame.exe
+  base_path: ../..
+  platform: win32
+  compiler: MSVC8
+  src_path: src
+  asm_path: asm
+  asset_path: assets
+  build_path: build
+  ld_script_path: build/ffxivgame.ld
+  o_as_suffix: True
+  section_order: [".text", ".rdata", ".data", ".bss"]
+  subalign: null
+  ld_align_segment_vram_end: False
+  ld_align_section_vram_end: False
+  ld_discard_section: False
+  ld_assert_no_orphans: True
+  ld_sections_denylist: [".drectve", ".debug$F", ".debug$S", ".debug$T"]
+  symbol_addrs_path:
+    - versions/1.23b/symbol_addrs.txt
+    - versions/1.23b/symbol_addrs_crt.txt
+    - versions/1.23b/symbol_addrs_openssl.txt
+    - versions/1.23b/symbol_addrs_zlib.txt
+    - versions/1.23b/symbol_addrs_lua.txt
+  create_undefined_funcs_auto: False
+  create_undefined_syms_auto: False
+  generate_asm_macros_files: False
+
+segments:
+  - name: header
+    type: bin
+    start: 0x0
+    linker_entry: False
+  - name: text
+    type: code
+    start: 0x1000
+    vram: 0x401000
+    ld_fill_value: 0xCCCCCCCC
+    subsegments:
+      - [0x1000, asm]
+      - [0xEAB0, cpp, Engine/Memory/modules/SystemHeap]
+      - [0xEE90, cpp, Engine/Memory/modules/ComplexLink]
+      - [0xF560, asm]
+      - [0x152C0, cpp]
+      - [0x15420, cpp, Engine/Vfx/Common/Io/Printer]
+      - [0x162A0, cpp, Engine/Vfx/Common/Memory/Memory]
+      - [0x16660, cpp, Engine/Vfx/Common/Memory/MemoryMap]
+      - [0x16810, cpp, Engine/Vfx/Common/Map/BaseMap]
+      - [0x17420, cpp, Engine/Vfx/Common/Map/UsIntMap]
+      - [0x17640, cpp]
+      - [0x17660, cpp, Engine/Dw/RenderInterface/D3d9/Rapture/MemoryPool]
+      - [0x18050, asm]
+      - { start: 0x5CB10, type: lib, name: openssl/rsa_err, library: build/third_party/openssl/libeay32.lib, object: rsa_err.obj }
+      - [0x5CB40, asm]
+      - { start: 0x5D490, type: lib, name: openssl/p_verify, library: build/third_party/openssl/libeay32.lib, object: p_verify.obj }
+      - [0x5D620, asm]
+      - { start: 0x5D660, type: lib, name: openssl/p_sign, library: build/third_party/openssl/libeay32.lib, object: p_sign.obj }
+      - [0x5D814, asm]
+      - { start: 0x60F70, type: lib, name: openssl/tasn_fre, library: build/third_party/openssl/libeay32.lib, object: tasn_fre.obj }
+      - [0x61318, asm]
+      - { start: 0x62D60, type: lib, name: openssl/x509_obj, library: build/third_party/openssl/libeay32.lib, object: x509_obj.obj }
+      - [0x630D0, asm]
+      - { start: 0x69480, type: lib, name: openssl/eng_init, library: build/third_party/openssl/libeay32.lib, object: eng_init.obj }
+      - [0x696A4, asm]
+      - { start: 0x6ACE0, type: lib, name: openssl/rsa_sign, library: build/third_party/openssl/libeay32.lib, object: rsa_sign.obj }
+      - [0x6B324, asm]
+      - { start: 0x6C200, type: lib, name: openssl/obj_lib, library: build/third_party/openssl/libeay32.lib, object: obj_lib.obj }
+      - [0x6C440, asm]
+      - { start: 0x6DAA0, type: lib, name: openssl/v3_alt, library: build/third_party/openssl/libeay32.lib, object: v3_alt.obj }
+      - [0x6E950, asm]
+      - { start: 0x72C90, type: lib, name: openssl/bn_word, library: build/third_party/openssl/libeay32.lib, object: bn_word.obj }
+      - { start: 0x72FD0, type: lib, name: openssl/bn_shift, library: build/third_party/openssl/libeay32.lib, object: bn_shift.obj }
+      - [0x733A8, asm]
+      - { start: 0x78220, type: lib, name: openssl/bn_gcd, library: build/third_party/openssl/libeay32.lib, object: bn_gcd.obj }
+      - [0x78C10, asm]
+      - { start: 0x798C0, type: lib, name: openssl/bn_add, library: build/third_party/openssl/libeay32.lib, object: bn_add.obj }
+      - [0x79C50, asm]
+      - { start: 0x7F1A0, type: lib, name: openssl/hm_pmeth, library: build/third_party/openssl/libeay32.lib, object: hm_pmeth.obj }
+      - [0x7F4FC, asm]
+      - { start: 0x7F500, type: lib, name: openssl/ec_pmeth, library: build/third_party/openssl/libeay32.lib, object: ec_pmeth.obj }
+      - [0x7F9EC, asm]
+      - { start: 0x80180, type: lib, name: openssl/rsa_pmeth, library: build/third_party/openssl/libeay32.lib, object: rsa_pmeth.obj }
+      - [0x80C90, asm]
+      - { start: 0x80F00, type: lib, name: openssl/evp_asn1, library: build/third_party/openssl/libeay32.lib, object: evp_asn1.obj }
+      - [0x81248, asm]
+      - { start: 0x81AC0, type: lib, name: openssl/a_utf8, library: build/third_party/openssl/libeay32.lib, object: a_utf8.obj }
+      - [0x81F28, asm]
+      - { start: 0x82300, type: lib, name: openssl/a_mbstr, library: build/third_party/openssl/libeay32.lib, object: a_mbstr.obj }
+      - [0x829D8, asm]
+      - { start: 0x87F30, type: lib, name: openssl/p12_key, library: build/third_party/openssl/libeay32.lib, object: p12_key.obj }
+      - [0x883B4, asm]
+      - { start: 0x88A50, type: lib, name: openssl/rsa_saos, library: build/third_party/openssl/libeay32.lib, object: rsa_saos.obj }
+      - [0x88CE8, asm]
+      - { start: 0x88CF0, type: lib, name: openssl/mdc2dgst, library: build/third_party/openssl/libeay32.lib, object: mdc2dgst.obj }
+      - [0x89014, asm]
+      - { start: 0x8B450, type: lib, name: openssl/cmll_cfb, library: build/third_party/openssl/libeay32.lib, object: cmll_cfb.obj }
+      - { start: 0x8B510, type: lib, name: openssl/cmll_ecb, library: build/third_party/openssl/libeay32.lib, object: cmll_ecb.obj }
+      - { start: 0x8B540, type: lib, name: openssl/cmll_ofb, library: build/third_party/openssl/libeay32.lib, object: cmll_ofb.obj }
+      - [0x8B56C, asm]
+      - { start: 0x8B690, type: lib, name: openssl/c_cfb64, library: build/third_party/openssl/libeay32.lib, object: c_cfb64.obj }
+      - [0x8B8B4, asm]
+      - { start: 0x8B8C0, type: lib, name: openssl/c_ecb, library: build/third_party/openssl/libeay32.lib, object: c_ecb.obj }
+      - [0x8B998, asm]
+      - { start: 0x8B9A0, type: lib, name: openssl/c_ofb64, library: build/third_party/openssl/libeay32.lib, object: c_ofb64.obj }
+      - { start: 0x8BBA0, type: lib, name: openssl/c_skey, library: build/third_party/openssl/libeay32.lib, object: c_skey.obj }
+      - [0x8CEA4, asm]
+      - { start: 0x8CEB0, type: lib, name: openssl/bf_cfb64, library: build/third_party/openssl/libeay32.lib, object: bf_cfb64.obj }
+      - [0x8D0D4, asm]
+      - { start: 0x8D1C0, type: lib, name: openssl/bf_ofb64, library: build/third_party/openssl/libeay32.lib, object: bf_ofb64.obj }
+      - { start: 0x8D3C0, type: lib, name: openssl/bf_skey, library: build/third_party/openssl/libeay32.lib, object: bf_skey.obj }
+      - { start: 0x8D540, type: lib, name: openssl/rc2_cbc, library: build/third_party/openssl/libeay32.lib, object: rc2_cbc.obj }
+      - { start: 0x8DD60, type: lib, name: openssl/rc2cfb64, library: build/third_party/openssl/libeay32.lib, object: rc2cfb64.obj }
+      - { start: 0x8DF80, type: lib, name: openssl/rc2_ecb, library: build/third_party/openssl/libeay32.lib, object: rc2_ecb.obj }
+      - { start: 0x8E060, type: lib, name: openssl/rc2ofb64, library: build/third_party/openssl/libeay32.lib, object: rc2ofb64.obj }
+      - { start: 0x8E260, type: lib, name: openssl/rc2_skey, library: build/third_party/openssl/libeay32.lib, object: rc2_skey.obj }
+      - { start: 0x8E360, type: lib, name: openssl/seed_cbc, library: build/third_party/openssl/libeay32.lib, object: seed_cbc.obj }
+      - { start: 0x8E390, type: lib, name: openssl/seed_cfb, library: build/third_party/openssl/libeay32.lib, object: seed_cfb.obj }
+      - { start: 0x8E3D0, type: lib, name: openssl/seed_ecb, library: build/third_party/openssl/libeay32.lib, object: seed_ecb.obj }
+      - { start: 0x8E400, type: lib, name: openssl/seed_ofb, library: build/third_party/openssl/libeay32.lib, object: seed_ofb.obj }
+      - { start: 0x8E430, type: lib, name: openssl/seed, library: build/third_party/openssl/libeay32.lib, object: seed.obj }
+      - [0x90A1C, asm]
+      - { start: 0x90AE0, type: lib, name: openssl/i_cbc, library: build/third_party/openssl/libeay32.lib, object: i_cbc.obj }
+      - [0x918AC, asm]
+      - { start: 0x918B0, type: lib, name: openssl/i_ofb64, library: build/third_party/openssl/libeay32.lib, object: i_ofb64.obj }
+      - { start: 0x91AB0, type: lib, name: openssl/i_cfb64, library: build/third_party/openssl/libeay32.lib, object: i_cfb64.obj }
+      - [0x91CD4, asm]
+      - { start: 0x91CE0, type: lib, name: openssl/i_skey, library: build/third_party/openssl/libeay32.lib, object: i_skey.obj }
+      - { start: 0x91F70, type: lib, name: openssl/ecb3_enc, library: build/third_party/openssl/libeay32.lib, object: ecb3_enc.obj }
+      - { start: 0x92060, type: lib, name: openssl/ofb64ede, library: build/third_party/openssl/libeay32.lib, object: ofb64ede.obj }
+      - { start: 0x92290, type: lib, name: openssl/cfb64ede, library: build/third_party/openssl/libeay32.lib, object: cfb64ede.obj }
+      - [0x92C68, asm]
+      - { start: 0x93390, type: lib, name: openssl/ofb64enc, library: build/third_party/openssl/libeay32.lib, object: ofb64enc.obj }
+      - { start: 0x93590, type: lib, name: openssl/cfb64enc, library: build/third_party/openssl/libeay32.lib, object: cfb64enc.obj }
+      - { start: 0x937B0, type: lib, name: openssl/cfb_enc, library: build/third_party/openssl/libeay32.lib, object: cfb_enc.obj }
+      - { start: 0x93E30, type: lib, name: openssl/xcbc_enc, library: build/third_party/openssl/libeay32.lib, object: xcbc_enc.obj }
+      - [0x9445C, asm]
+      - { start: 0x95DD0, type: lib, name: openssl/rsa_none, library: build/third_party/openssl/libeay32.lib, object: rsa_none.obj }
+      - [0x95E84, asm]
+      - { start: 0x95E90, type: lib, name: openssl/rsa_ssl, library: build/third_party/openssl/libeay32.lib, object: rsa_ssl.obj }
+      - [0x96064, asm]
+      - { start: 0x966C0, type: lib, name: openssl/rsa_pk1, library: build/third_party/openssl/libeay32.lib, object: rsa_pk1.obj }
+      - [0x969BC, asm]
+      - { start: 0x969C0, type: lib, name: openssl/rsa_x931, library: build/third_party/openssl/libeay32.lib, object: rsa_x931.obj }
+      - [0x96B6C, asm]
+      - { start: 0x96B70, type: lib, name: openssl/bn_div, library: build/third_party/openssl/libeay32.lib, object: bn_div.obj }
+      - [0x973F8, asm]
+      - { start: 0x980E0, type: lib, name: openssl/bn_exp2, library: build/third_party/openssl/libeay32.lib, object: bn_exp2.obj }
+      - [0x9872C, asm]
+      - { start: 0x99910, type: lib, name: openssl/ec_cvt, library: build/third_party/openssl/libeay32.lib, object: ec_cvt.obj }
+      - [0x99A08, asm]
+      - { start: 0x9A390, type: lib, name: openssl/t_pkey, library: build/third_party/openssl/libeay32.lib, object: t_pkey.obj }
+      - [0x9A54C, asm]
+      - { start: 0x9B300, type: lib, name: openssl/ech_key, library: build/third_party/openssl/libeay32.lib, object: ech_key.obj }
+      - [0x9B338, asm]
+      - { start: 0x9BA60, type: lib, name: openssl/dsa_key, library: build/third_party/openssl/libeay32.lib, object: dsa_key.obj }
+      - { start: 0x9BBA0, type: lib, name: openssl/dh_gen, library: build/third_party/openssl/libeay32.lib, object: dh_gen.obj }
+      - { start: 0x9BD40, type: lib, name: openssl/rsa_pss, library: build/third_party/openssl/libeay32.lib, object: rsa_pss.obj }
+      - [0x9C378, asm]
+      - { start: 0x9C380, type: lib, name: openssl/rsa_gen, library: build/third_party/openssl/libeay32.lib, object: rsa_gen.obj }
+      - [0x9C8AC, asm]
+      - { start: 0x9C960, type: lib, name: openssl/v3_int, library: build/third_party/openssl/libeay32.lib, object: v3_int.obj }
+      - [0x9C974, asm]
+      - { start: 0x9C980, type: lib, name: openssl/v3_pci, library: build/third_party/openssl/libeay32.lib, object: v3_pci.obj }
+      - [0x9D118, asm]
+      - { start: 0x9D970, type: lib, name: openssl/v3_enum, library: build/third_party/openssl/libeay32.lib, object: v3_enum.obj }
+      - [0x9D9B8, asm]
+      - { start: 0x9D9C0, type: lib, name: openssl/v3_akey, library: build/third_party/openssl/libeay32.lib, object: v3_akey.obj }
+      - [0x9DCE4, asm]
+      - { start: 0x9DD80, type: lib, name: openssl/v3_bitst, library: build/third_party/openssl/libeay32.lib, object: v3_bitst.obj }
+      - { start: 0x9DF80, type: lib, name: openssl/v3_skey, library: build/third_party/openssl/libeay32.lib, object: v3_skey.obj }
+      - [0x9E164, asm]
+      - { start: 0x9E170, type: lib, name: openssl/v3_ia5, library: build/third_party/openssl/libeay32.lib, object: v3_ia5.obj }
+      - [0x9E25C, asm]
+      - { start: 0xA22F0, type: lib, name: openssl/wp_block, library: build/third_party/openssl/libeay32.lib, object: wp_block.obj }
+      - [0xA3658, asm]
+      - { start: 0xA36D0, type: lib, name: openssl/cfb128, library: build/third_party/openssl/libeay32.lib, object: cfb128.obj }
+      - { start: 0xA3BB0, type: lib, name: openssl/ofb128, library: build/third_party/openssl/libeay32.lib, object: ofb128.obj }
+      - { start: 0xA3CB0, type: lib, name: openssl/cbc128, library: build/third_party/openssl/libeay32.lib, object: cbc128.obj }
+      - { start: 0xA4140, type: lib, name: openssl/bn_sqr, library: build/third_party/openssl/libeay32.lib, object: bn_sqr.obj }
+      - [0xA455C, asm]
+      - { start: 0xAFCA0, type: lib, name: openssl/bn_kron, library: build/third_party/openssl/libeay32.lib, object: bn_kron.obj }
+      - [0xAFF0C, asm]
+      - { start: 0xAFF10, type: lib, name: openssl/bn_sqrt, library: build/third_party/openssl/libeay32.lib, object: bn_sqrt.obj }
+      - [0xB0634, asm]
+      - { start: 0x5D20F4, type: lib, name: crt/secchk, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/secchk.obj }
+      - [0x5D2104, asm]
+      - { start: 0x5D2110, type: lib, name: crt/memset, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/memset.obj }
+      - { start: 0x5D218A, type: lib, name: crt/invarg, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/cpp_obj/invarg.obj }
+      - [0x5D22C4, asm]
+      - { start: 0x5D29D0, type: lib, name: crt/chkstk, library: third_party/crt/libcmt.lib, object: chkstk.obj }
+      - { start: 0x5D29FB, type: lib, name: crt/strcpy_s, library: third_party/crt/libcmt.lib, object: strcpy_s.obj }
+      - [0x5D2A60, asm]
+      - { start: 0x5D5110, type: lib, name: crt/memmove, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/memmove.obj }
+      - { start: 0x5D5475, type: lib, name: crt/strncmp, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/strncmp.obj }
+      - [0x5D5534, asm]
+      - { start: 0x5D5540, type: lib, name: crt/strncpy, library: third_party/crt/libcmt.lib, object: strncpy.obj }
+      - [0x5D5664, asm]
+      - { start: 0x5D5790, type: lib, name: crt/lldiv, library: third_party/crt/libcmt.lib, object: lldiv.obj }
+      - { start: 0x5D5840, type: lib, name: crt/llmul, library: third_party/crt/libcmt.lib, object: llmul.obj }
+      - { start: 0x5D5880, type: lib, name: crt/ulldiv, library: third_party/crt/libcmt.lib, object: ulldiv.obj }
+      - [0x5D58E8, asm]
+      - { start: 0x5D5C88, type: lib, name: crt/free, library: third_party/crt/libcmt.lib, object: free.obj }
+      - { start: 0x5D5D20, type: lib, name: crt/qsort, library: third_party/crt/libcmt.lib, object: qsort.obj }
+      - { start: 0x5D6090, type: lib, name: crt/strstr, library: third_party/crt/libcmt.lib, object: strstr.obj }
+      - { start: 0x5D6116, type: lib, name: crt/bsearch, library: third_party/crt/libcmt.lib, object: bsearch.obj }
+      - { start: 0x5D61D6, type: lib, name: crt/ehvecctr, library: third_party/crt/libcmt.lib, object: ehvecctr.obj }
+      - { start: 0x5D6240, type: lib, name: crt/cos, library: third_party/crt/libcmt.lib, object: cos.obj }
+      - { start: 0x5D6370, type: lib, name: crt/sin, library: third_party/crt/libcmt.lib, object: sin.obj }
+      - { start: 0x5D64A0, type: lib, name: crt/tan, library: third_party/crt/libcmt.lib, object: tan.obj }
+      - { start: 0x5D65D0, type: lib, name: crt/strrchr, library: third_party/crt/libcmt.lib, object: strrchr.obj }
+      - [0x5D6600, asm]
+      - { start: 0x5D6BC0, type: lib, name: crt/memchr, library: third_party/crt/libcmt.lib, object: memchr.obj }
+      - { start: 0x5D6C6D, type: lib, name: crt/chdir, library: third_party/crt/libcmt.lib, object: chdir.obj }
+      - { start: 0x5D6D90, type: lib, name: crt/fullpath, library: third_party/crt/libcmt.lib, object: fullpath.obj }
+      - [0x5D6E98, asm]
+      - { start: 0x5D6EC0, type: lib, name: crt/fseek, library: third_party/crt/libcmt.lib, object: fseek.obj }
+      - [0x5D6FCC, asm]
+      - { start: 0x5D741C, type: lib, name: crt/fprintf, library: third_party/crt/libcmt.lib, object: fprintf.obj }
+      - { start: 0x5D756B, type: lib, name: crt/tolower, library: third_party/crt/libcmt.lib, object: tolower.obj }
+      - { start: 0x5D76A9, type: lib, name: crt/wstati32, library: third_party/crt/libcmt.lib, object: wstati32.obj }
+      - { start: 0x5D7ADD, type: lib, name: crt/ftell, library: third_party/crt/libcmt.lib, object: ftell.obj }
+      - { start: 0x5D7CE3, type: lib, name: crt/getenv, library: third_party/crt/libcmt.lib, object: getenv.obj }
+      - { start: 0x5D7FA5, type: lib, name: crt/_ctype, library: third_party/crt/libcmt.lib, object: _ctype.obj }
+      - { start: 0x5D8471, type: lib, name: crt/strerror, library: third_party/crt/libcmt.lib, object: strerror.obj }
+      - { start: 0x5D8500, type: lib, name: crt/strchr, library: third_party/crt/libcmt.lib, object: strchr.obj }
+      - { start: 0x5D85CE, type: lib, name: crt/realloc, library: third_party/crt/libcmt.lib, object: realloc.obj }
+      - { start: 0x5D8870, type: lib, name: crt/strcmp, library: third_party/crt/libcmt.lib, object: strcmp.obj }
+      - [0x5D88F8, asm]
+      - { start: 0x5D8BE0, type: lib, name: crt/alloca16, library: third_party/crt/libcmt.lib, object: alloca16.obj }
+      - [0x5D8C0C, asm]
+      - { start: 0x5D9A90, type: lib, name: crt/ullshr, library: third_party/crt/libcmt.lib, object: ullshr.obj }
+      - [0x5D9AB0, asm]
+      - { start: 0x5DA7D0, type: lib, name: crt/strcspn, library: third_party/crt/libcmt.lib, object: strcspn.obj }
+      - { start: 0x5DA820, type: lib, name: crt/ceil_pentium4, library: third_party/crt/libcmt.lib, object: ceil_pentium4.obj }
+      - [0x5DA940, asm]
+      - { start: 0x5DAC40, type: lib, name: crt/atan, library: third_party/crt/libcmt.lib, object: atan.obj }
+      - { start: 0x5DAD60, type: lib, name: crt/acos, library: third_party/crt/libcmt.lib, object: acos.obj }
+      - [0x5DAEA8, asm]
+      - { start: 0x5DAFB0, type: lib, name: crt/87fmod, library: third_party/crt/libcmt.lib, object: 87fmod.obj }
+      - [0x5DAFE4, asm]
+      - { start: 0x5DB0F0, type: lib, name: crt/log10, library: third_party/crt/libcmt.lib, object: log10.obj }
+      - { start: 0x5DB240, type: lib, name: crt/pow, library: third_party/crt/libcmt.lib, object: pow.obj }
+      - { start: 0x5DB4D0, type: lib, name: crt/modf_pentium4, library: third_party/crt/libcmt.lib, object: modf_pentium4.obj }
+      - [0x5DB618, asm]
+      - { start: 0x5DBA20, type: lib, name: crt/strpbrk, library: third_party/crt/libcmt.lib, object: strpbrk.obj }
+      - [0x5DBA60, asm]
+      - { start: 0x5DF700, type: lib, name: crt/lowhelpr, library: third_party/crt/libcmt.lib, object: lowhelpr.obj }
+      - { start: 0x5DF74C, type: lib, name: crt/gs_report, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/gs_report.obj }
+      - [0x5DF850, asm]
+      - { start: 0x5E4E6C, type: lib, name: crt/gs_support, library: third_party/crt/libcmt.lib, object: gs_support.obj }
+      - [0x5E4F00, asm]
+      - { start: 0x5E5064, type: lib, name: crt/_flsbuf, library: third_party/crt/libcmt.lib, object: _flsbuf.obj }
+      - [0x5E51C4, asm]
+      - { start: 0x5E6620, type: lib, name: crt/cos_pentium4, library: third_party/crt/libcmt.lib, object: cos_pentium4.obj }
+      - { start: 0x5E67D0, type: lib, name: crt/87disp, library: third_party/crt/libcmt.lib, object: 87disp.obj }
+      - { start: 0x5E69A0, type: lib, name: crt/common, library: third_party/crt/libcmt.lib, object: common.obj }
+      - { start: 0x5E6B30, type: lib, name: crt/genexcep, library: third_party/crt/libcmt.lib, object: genexcep.obj }
+      - { start: 0x5E6B90, type: lib, name: crt/sin_pentium4, library: third_party/crt/libcmt.lib, object: sin_pentium4.obj }
+      - { start: 0x5E6D60, type: lib, name: crt/tan_pentium4, library: third_party/crt/libcmt.lib, object: tan_pentium4.obj }
+      - [0x5E6FC0, asm]
+      - { start: 0x5E9EB4, type: lib, name: crt/tzset, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/tzset.obj }
+      - { start: 0x5EA658, type: lib, name: crt/timeset, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/timeset.obj }
+      - [0x5EA70C, asm]
+      - { start: 0x5EC110, type: lib, name: crt/atan_pentium4, library: third_party/crt/libcmt.lib, object: atan_pentium4.obj }
+      - { start: 0x5EC400, type: lib, name: crt/acos_pentium4, library: third_party/crt/libcmt.lib, object: acos_pentium4.obj }
+      - { start: 0x5EC960, type: lib, name: crt/87triga, library: third_party/crt/libcmt.lib, object: 87triga.obj }
+      - [0x5ECA08, asm]
+      - { start: 0x5ED880, type: lib, name: crt/adj_fdiv, library: third_party/crt/libcmt.lib, object: adj_fdiv.obj }
+      - { start: 0x5EE610, type: lib, name: crt/log10_pentium4, library: third_party/crt/libcmt.lib, object: log10_pentium4.obj }
+      - { start: 0x5EE8A0, type: lib, name: crt/87tran, library: third_party/crt/libcmt.lib, object: 87tran.obj }
+      - { start: 0x5EEAB0, type: lib, name: crt/pow_pentium4, library: third_party/crt/libcmt.lib, object: pow_pentium4.obj }
+      - [0x5EF610, asm]
+      - { start: 0x5F63A8, type: lib, name: crt/contrlfp, library: third_party/crt/libcmt.lib, object: contrlfp.obj }
+      - [0x5F6414, asm]
+      - { start: 0x5FC518, type: lib, name: crt/_flswbuf, library: third_party/crt/libcmt.lib, object: _flswbuf.obj }
+      - [0x5FC688, asm]
+      - [0x942B40, cpp, Sqex/Socket/SocketWinsock]
+      - [0x943460, asm]
+      - { start: 0x94DC90, type: lib, name: zlib/deflate, library: build/third_party/zlib/zlibstat.lib, object: deflate.obj }
+      - [0x94F3C4, asm]
+      - { start: 0x94F3D0, type: lib, name: zlib/inflate, library: build/third_party/zlib/zlibstat.lib, object: inflate.obj }
+      - [0x950C70, asm]
+      - { start: 0x9546D0, type: lib, name: zlib/adler32, library: build/third_party/zlib/zlibstat.lib, object: adler32.obj }
+      - [0x954944, asm]
+      - { start: 0x954950, type: lib, name: zlib/trees, library: build/third_party/zlib/zlibstat.lib, object: trees.obj }
+      - { start: 0x9563F0, type: lib, name: zlib/crc32, library: build/third_party/zlib/zlibstat.lib, object: crc32.obj }
+      - { start: 0x9566B0, type: lib, name: zlib/zutil, library: build/third_party/zlib/zlibstat.lib, object: zutil.obj }
+      - [0x9566DC, asm]
+      - { start: 0x9566E0, type: lib, name: zlib/gvmat32c, library: build/third_party/zlib/zlibstat.lib, object: gvmat32c.obj }
+      - { start: 0x956730, type: lib, name: zlib/inffas32, library: build/third_party/zlib/zlibstat.lib, object: inffas32.obj }
+      - { start: 0x956ED0, type: lib, name: zlib/inftrees, library: build/third_party/zlib/zlibstat.lib, object: inftrees.obj }
+      - [0x9573B8, asm]
+      - { start: 0x958148, type: lib, name: zlib/gvmat32, library: build/third_party/zlib/zlibstat.lib, object: gvmat32.obj }
+      - [0x95884C, asm]
+      - { start: 0x9C4034, type: lib, name: crt/exsup3, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/exsup3.obj }
+      - { start: 0x9C4155, type: lib, name: crt/threadex, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/threadex.obj }
+      - { start: 0x9C42FD, type: lib, name: crt/snprintf, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/snprintf.obj }
+      - { start: 0x9C43B0, type: lib, name: crt/llshr, library: third_party/crt/libcmt.lib, object: llshr.obj }
+      - { start: 0x9C43E0, type: lib, name: crt/llshl, library: third_party/crt/libcmt.lib, object: llshl.obj }
+      - { start: 0x9C43FF, type: lib, name: crt/sin_sse2, library: third_party/crt/libcmt.lib, object: sin_sse2.obj }
+      - { start: 0x9C45B7, type: lib, name: crt/cos_sse2, library: third_party/crt/libcmt.lib, object: cos_sse2.obj }
+      - { start: 0x9C4762, type: lib, name: crt/atan2_sse2, library: third_party/crt/libcmt.lib, object: atan2_sse2.obj }
+      - { start: 0x9C4C80, type: lib, name: crt/asin, library: third_party/crt/libcmt.lib, object: asin.obj }
+      - { start: 0x9C4DC6, type: lib, name: crt/asin_sse2, library: third_party/crt/libcmt.lib, object: asin_sse2.obj }
+      - { start: 0x9C520F, type: lib, name: crt/acos_sse2, library: third_party/crt/libcmt.lib, object: acos_sse2.obj }
+      - { start: 0x9C56C0, type: lib, name: crt/87ctran, library: third_party/crt/libcmt.lib, object: 87ctran.obj }
+      - { start: 0x9C5750, type: lib, name: crt/log, library: third_party/crt/libcmt.lib, object: log.obj }
+      - [0x9C58A0, asm]
+      - { start: 0x9C5B60, type: lib, name: crt/eh3valid, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/eh3valid.obj }
+      - [0x9C5FC4, asm]
+      - { start: 0x9C5FD0, type: lib, name: crt/asin_pentium4, library: third_party/crt/libcmt.lib, object: asin_pentium4.obj }
+      - { start: 0x9C6550, type: lib, name: crt/exp_pentium4, library: third_party/crt/libcmt.lib, object: exp_pentium4.obj }
+      - { start: 0x9C6810, type: lib, name: crt/log_pentium4, library: third_party/crt/libcmt.lib, object: log_pentium4.obj }
+      - [0x9C6A80, asm]
+      - { start: 0x9C945C, type: lib, name: dxsdk/oapmatrixmix, library: third_party/dxsdk/xapobase.lib, object: e:/dxsdk/mar09.obj.x86fre/audio/oapipeline/source/core/objfre/i386/oapmatrixmix.obj }
+      - [0x9CD3C8, asm]
+      - { start: 0x9D2280, type: lib, name: lua/lmem, library: build/third_party/lua/lua.lib, object: lmem.obj }
+      - [0x9D237C, asm]
+      - { start: 0x9D3FB0, type: lib, name: lua/ltm, library: build/third_party/lua/lua.lib, object: ltm.obj }
+      - [0x9D4098, asm]
+      - { start: 0x9D6040, type: lib, name: lua/lfunc, library: build/third_party/lua/lua.lib, object: lfunc.obj }
+      - [0x9D644C, asm]
+      - { start: 0x9E0620, type: lib, name: lua/lzio, library: build/third_party/lua/lua.lib, object: lzio.obj }
+      - [0x9E07E8, asm]
+      - [0x9E73C0, cpp, Engine/Cut/Plugins/ScheduleActor]
+      - [0x9E7A90, asm]
+      - [0x9E9880, cpp, Engine/Cut/Plugins/ScheduleClip]
+      - [0x9E9E60, asm]
+      - [0x9EC760, cpp, Engine/Cut/Plugins/KillClip]
+      - [0x9EC8E0, asm]
+      - [0xA3B050, cpp, Engine/Vfx/Common/Thread/BaseThread]
+      - [0xA3B4A0, asm]
+      - [0xA3BE20, cpp, Engine/Vfx/Common/Thread/UnlockCondition]
+      - [0xA3C450, cpp, Engine/Vfx/Common/Thread/ThreadManager]
+      - [0xA3C5C0, asm]
+      - { start: 0xA3FD60, type: lib, name: zlib/uncompr, library: build/third_party/zlib/zlibstat.lib, object: uncompr.obj }
+      - [0xA3FE0C, asm]
+      - { start: 0xA420C0, type: lib, name: crt/87trigh, library: third_party/crt/libcmt.lib, object: 87trigh.obj }
+      - [0xA421BC, asm]
+      - { start: 0xA43D80, type: lib, name: openssl/md5-586, library: build/third_party/openssl/libeay32.lib, object: md5-586.obj, linker_section: .text$ }
+      - { start: 0xA44440, type: lib, name: openssl/sha1-586, library: build/third_party/openssl/libeay32.lib, object: sha1-586.obj, linker_section: .text$ }
+      - { start: 0xA45440, type: lib, name: openssl/sha256-586, library: build/third_party/openssl/libeay32.lib, object: sha256-586.obj, linker_section: .text$ }
+      - [0xA45844, asm]
+      - { start: 0xA45880, type: lib, name: openssl/sha512-586, library: build/third_party/openssl/libeay32.lib, object: sha512-586.obj, linker_section: .text$ }
+      - [0xA46484, asm]
+      - { start: 0xA464C0, type: lib, name: openssl/bn-586, library: build/third_party/openssl/libeay32.lib, object: bn-586.obj, linker_section: .text$ }
+      - [0xA47324, asm]
+      - { start: 0xA47340, type: lib, name: openssl/cmll-x86, library: build/third_party/openssl/libeay32.lib, object: cmll-x86.obj, linker_section: .text$ }
+      - { start: 0xA49900, type: lib, name: openssl/aes-586, library: build/third_party/openssl/libeay32.lib, object: aes-586.obj, linker_section: .text$ }
+      - [0xA4CFD4, asm]
+      - { start: 0xA4D000, type: lib, name: openssl/cast-586, library: build/third_party/openssl/libeay32.lib, object: cast-586.obj, linker_section: .text$ }
+      - { start: 0xA4DB40, type: lib, name: openssl/bf-586, library: build/third_party/openssl/libeay32.lib, object: bf-586.obj, linker_section: .text$ }
+      - { start: 0xA4E580, type: lib, name: openssl/rc4-586, library: build/third_party/openssl/libeay32.lib, object: rc4-586.obj, linker_section: .text$ }
+      - { start: 0xA4E840, type: lib, name: openssl/des-586, library: build/third_party/openssl/libeay32.lib, object: des-586.obj, linker_section: .text$ }
+      - { start: 0xA50600, type: lib, name: openssl/co-586, library: build/third_party/openssl/libeay32.lib, object: co-586.obj, linker_section: .text$ }
+      - { start: 0xA50FC0, type: lib, name: openssl/rmd-586, library: build/third_party/openssl/libeay32.lib, object: rmd-586.obj, linker_section: .text$ }
+      - [0xA524AC, asm]
+      - { start: 0xA524C0, type: lib, name: openssl/x86-mont, library: build/third_party/openssl/libeay32.lib, object: x86-mont.obj, linker_section: .text$ }
+      - [0xA52A60, asm]
+      - { start: 0xA52A80, type: lib, name: openssl/wp-mmx, library: build/third_party/openssl/libeay32.lib, object: wp-mmx.obj, linker_section: .text$ }
+      - [0xA54290, asm]
+      - { start: 0xA551B0, type: .text, name: Engine/Vfx/Common/Io/Printer, linker_section: .text$x }
+      - { start: 0xA551F0, type: .text, name: Engine/Vfx/Common/Memory/Memory, linker_section: .text$x }
+      - [0xA55230, asm]
+      - { start: 0xB015C0, type: .text, name: Sqex/Socket/SocketWinsock, linker_section: .text$x }
+      - [0xB015F0, asm]
+      - { start: 0xB04F40, type: .text, name: Engine/Cut/Plugins/ScheduleActor, linker_section: .text$x }
+      - [0xB04FD0, asm]
+      - { start: 0xB050B0, type: .text, name: Engine/Cut/Plugins/ScheduleClip, linker_section: .text$x }
+      - [0xB050F8, asm]
+      - { start: 0xB069A0, type: .text, name: Engine/Vfx/Common/Thread/UnlockCondition, linker_section: .text$x }
+      - { start: 0xB069D0, type: .text, name: Engine/Vfx/Common/Thread/ThreadManager, linker_section: .text$x }
+      - [0xB06A00, asm]
+
+  - name: mssmixer
+    type: code
+    start: 0xB3D000
+    vram: 0xF3D000
+    ld_fill_value: 0xCCCCCCCC
+    subsegments:
+      - [0xB3D000, asm]
+
+  - name: rdata
+    type: code
+    start: 0xB3E000
+    vram: 0xF3E000
+    subsegments:
+      - [0xB3E000, rdata]
+      - { start: 0xB5659C, type: .rdata, name: Engine/Memory/modules/SystemHeap }
+      - [0xB565FC, rdata]
+      - { start: 0xB5662C, type: .rdata, name: Engine/Memory/modules/ComplexLink }
+      - [0xB566F8, rdata]
+      - { start: 0xB573F4, type: .rdata, name: Engine/Vfx/Common/Io/Printer }
+      - { start: 0xB57674, type: .rdata, name: Engine/Vfx/Common/Memory/MemoryMap }
+      - { start: 0xB576B0, type: .rdata, name: Engine/Vfx/Common/Map/BaseMap }
+      - { start: 0xB57878, type: .rdata, name: Engine/Vfx/Common/Map/UsIntMap }
+      - [0xB5791C, rdata]
+      - { start: 0xB68074, type: .rdata, name: openssl/rsa_err }
+      - [0xB68900, rdata]
+      - { start: 0xB68958, type: .rdata, name: openssl/p_verify }
+      - [0xB68970, rdata]
+      - { start: 0xB689BC, type: .rdata, name: openssl/p_sign }
+      - [0xB689D4, rdata]
+      - { start: 0xB69F4C, type: .rdata, name: openssl/x509_obj }
+      - [0xB69F8C, rdata]
+      - { start: 0xB79184, type: .rdata, name: openssl/eng_init }
+      - [0xB791A0, rdata]
+      - { start: 0xB79308, type: .rdata, name: openssl/rsa_sign }
+      - [0xB79358, rdata]
+      - { start: 0xB794C8, type: .rdata, name: openssl/obj_lib }
+      - [0xB794E4, rdata]
+      - { start: 0xB79560, type: .rdata, name: openssl/v3_alt }
+      - [0xB79780, rdata]
+      - { start: 0xB7B470, type: .rdata, name: openssl/bn_gcd }
+      - { start: 0xB7B488, type: .rdata, name: openssl/bn_add }
+      - [0xB7B4A0, rdata]
+      - { start: 0xB7F738, type: .rdata, name: openssl/hm_pmeth }
+      - { start: 0xB7F7C8, type: .rdata, name: openssl/ec_pmeth }
+      - [0xB7F860, rdata]
+      - { start: 0xB7F9D8, type: .rdata, name: openssl/rsa_pmeth }
+      - [0xB7FAC8, rdata]
+      - { start: 0xB7FB00, type: .rdata, name: openssl/evp_asn1 }
+      - [0xB7FB1C, rdata]
+      - { start: 0xB7FEFC, type: .rdata, name: openssl/a_mbstr }
+      - [0xB7FF3C, rdata]
+      - { start: 0xB81F68, type: .rdata, name: openssl/p12_key }
+      - [0xB81F84, rdata]
+      - { start: 0xB81FB4, type: .rdata, name: openssl/rsa_saos }
+      - [0xB81FCC, rdata]
+      - { start: 0xB8201C, type: .rdata, name: openssl/c_ecb }
+      - { start: 0xB82048, type: .rdata, name: openssl/c_skey }
+      - [0xB84048, rdata]
+      - { start: 0xB84078, type: .rdata, name: openssl/bf_skey }
+      - { start: 0xB850C0, type: .rdata, name: openssl/rc2_ecb }
+      - { start: 0xB850E8, type: .rdata, name: openssl/rc2_skey }
+      - { start: 0xB851E8, type: .rdata, name: openssl/seed }
+      - [0xB861E8, rdata]
+      - { start: 0xB86C5C, type: .rdata, name: openssl/rsa_none }
+      - { start: 0xB86C74, type: .rdata, name: openssl/rsa_ssl }
+      - [0xB86C8C, rdata]
+      - { start: 0xB86CA4, type: .rdata, name: openssl/rsa_pk1 }
+      - { start: 0xB86CBC, type: .rdata, name: openssl/rsa_x931 }
+      - { start: 0xB86CD4, type: .rdata, name: openssl/bn_div }
+      - [0xB86CEC, rdata]
+      - { start: 0xB86DB8, type: .rdata, name: openssl/bn_exp2 }
+      - [0xB86DD0, rdata]
+      - { start: 0xB86F00, type: .rdata, name: openssl/t_pkey }
+      - [0xB86F24, rdata]
+      - { start: 0xB87000, type: .rdata, name: openssl/dh_gen }
+      - { start: 0xB87018, type: .rdata, name: openssl/rsa_pss }
+      - { start: 0xB87038, type: .rdata, name: openssl/rsa_gen }
+      - { start: 0xB87050, type: .rdata, name: openssl/v3_int }
+      - { start: 0xB870F8, type: .rdata, name: openssl/v3_pci }
+      - [0xB871C4, rdata]
+      - { start: 0xB875A4, type: .rdata, name: openssl/v3_enum }
+      - { start: 0xB87614, type: .rdata, name: openssl/v3_akey }
+      - [0xB87670, rdata]
+      - { start: 0xB8771C, type: .rdata, name: openssl/v3_bitst }
+      - { start: 0xB8795C, type: .rdata, name: openssl/v3_skey }
+      - { start: 0xB879B8, type: .rdata, name: openssl/v3_ia5 }
+      - [0xB87B94, rdata]
+      - { start: 0xB87E10, type: .rdata, name: openssl/wp_block }
+      - [0xB88660, rdata]
+      - { start: 0xB8C4D0, type: .rdata, name: openssl/bn_kron }
+      - { start: 0xB8C4F0, type: .rdata, name: openssl/bn_sqrt }
+      - [0xB8C508, rdata]
+      - { start: 0xC86290, type: .rdata, name: crt/ceil_pentium4 }
+      - [0xC862D8, rdata]
+      - { start: 0xC86330, type: .rdata, name: crt/modf_pentium4 }
+      - [0xC86370, rdata]
+      - { start: 0xC86EF4, type: .rdata, name: crt/gs_report }
+      - [0xC86EFC, rdata]
+      - { start: 0xC87EC0, type: .rdata, name: crt/cos_pentium4 }
+      - { start: 0xC88770, type: .rdata, name: crt/common }
+      - { start: 0xC887C0, type: .rdata, name: crt/sin_pentium4 }
+      - { start: 0xC89060, type: .rdata, name: crt/tan_pentium4 }
+      - [0xC8A700, rdata]
+      - { start: 0xC8AAB4, type: .rdata, name: crt/tzset }
+      - { start: 0xC8AAB8, type: .rdata, name: crt/timeset }
+      - [0xC8AAF8, rdata]
+      - { start: 0xC8ABD0, type: .rdata, name: crt/atan_pentium4 }
+      - { start: 0xC8AD20, type: .rdata, name: crt/acos_pentium4 }
+      - [0xC8C540, rdata]
+      - { start: 0xC8C5F0, type: .rdata, name: crt/log10_pentium4 }
+      - { start: 0xC8CF10, type: .rdata, name: crt/pow_pentium4 }
+      - [0xC90850, rdata]
+      - { start: 0xC91450, type: lib, name: crt/atan_table, library: third_party/crt/libcmt.lib, object: atan_table.obj, linker_section: .rdata }
+      - [0xC92C60, rdata]
+      - { start: 0xD13148, type: .rdata, name: Sqex/Socket/SocketWinsock }
+      - [0xD132D4, rdata]
+      - { start: 0xD13730, type: .rdata, name: zlib/deflate }
+      - { start: 0xD137E8, type: .rdata, name: zlib/inflate }
+      - [0xD14250, rdata]
+      - { start: 0xD14388, type: .rdata, name: zlib/uncompr }
+      - { start: 0xD14390, type: .rdata, name: zlib/trees }
+      - { start: 0xD14DC8, type: .rdata, name: zlib/crc32 }
+      - { start: 0xD16DC8, type: .rdata, name: zlib/zutil }
+      - { start: 0xD16E70, type: .rdata, name: zlib/inftrees }
+      - [0xD16FA0, rdata]
+      - { start: 0xD29CA0, type: .rdata, name: crt/sin_sse2 }
+      - { start: 0xD2A530, type: .rdata, name: crt/cos_sse2 }
+      - { start: 0xD2ADC0, type: .rdata, name: crt/atan2_sse2 }
+      - { start: 0xD2B980, type: .rdata, name: crt/asin_sse2 }
+      - { start: 0xD2D140, type: .rdata, name: crt/acos_sse2 }
+      - { start: 0xD2E910, type: .rdata, name: crt/asin_pentium4 }
+      - { start: 0xD300F0, type: .rdata, name: crt/exp_pentium4 }
+      - { start: 0xD305F0, type: .rdata, name: crt/log_pentium4 }
+      - [0xD30EF0, rdata]
+      - { start: 0xD31014, type: .rdata, name: dxsdk/oapmatrixmix }
+      - [0xD31028, rdata]
+      - { start: 0xD3144C, type: .rdata, name: lua/lmem }
+      - [0xD31474, rdata]
+      - { start: 0xD31730, type: .rdata, name: lua/ltm }
+      - [0xD31894, rdata]
+      - { start: 0xD33770, type: lib, name: lua/lopcodes, library: build/third_party/lua/lua.lib, object: lopcodes.obj, linker_section: .rdata }
+      - [0xD3395C, rdata]
+      - { start: 0xD33C74, type: .rdata, name: Engine/Cut/Plugins/ScheduleActor }
+      - [0xD33D08, rdata]
+      - { start: 0xD34B2C, type: .rdata, name: Engine/Cut/Plugins/ScheduleClip }
+      - [0xD34BAC, rdata]
+      - { start: 0xD357F0, type: .rdata, name: Engine/Cut/Plugins/KillClip }
+      - [0xD35844, rdata]
+      - { start: 0xD3DE28, type: .rdata, name: Engine/Vfx/Common/Thread/BaseThread }
+      - [0xD3DEC4, rdata]
+      - { start: 0xD3E028, type: .rdata, name: Engine/Vfx/Common/Thread/UnlockCondition }
+      - { start: 0xD3E138, type: .rdata, name: Engine/Vfx/Common/Thread/ThreadManager }
+      - [0xD3E188, rdata]
+      - { start: 0xD3EE2C, type: .rdata, name: Engine/Memory/modules/SystemHeap, linker_section: .rdata$r }
+      - { start: 0xD3EE78, type: .rdata, name: Engine/Memory/modules/ComplexLink, linker_section: .rdata$r }
+      - [0xD3EEC4, rdata]
+      - { start: 0xD3FB4C, type: .rdata, name: Engine/Vfx/Common/Io/Printer, linker_section: .rdata$r }
+      - { start: 0xD3FB94, type: .rdata, name: Engine/Vfx/Common/Memory/MemoryMap, linker_section: .rdata$r }
+      - { start: 0xD3FD28, type: .rdata, name: Engine/Vfx/Common/Map/BaseMap, linker_section: .rdata$r }
+      - { start: 0xD3FD3C, type: .rdata, name: Engine/Vfx/Common/Map/UsIntMap, linker_section: .rdata$r }
+      - [0xD3FD50, rdata]
+      - { start: 0xDA34B8, type: .rdata, name: Engine/Cut/Plugins/ScheduleActor, linker_section: .rdata$r }
+      - [0xDA3564, rdata]
+      - { start: 0xDA3ACC, type: .rdata, name: Engine/Cut/Plugins/ScheduleClip, linker_section: .rdata$r }
+      - [0xDA3BB8, rdata]
+      - { start: 0xDA41A0, type: .rdata, name: Engine/Cut/Plugins/KillClip, linker_section: .rdata$r }
+      - [0xDA428C, rdata]
+      - { start: 0xDA8730, type: .rdata, name: Engine/Vfx/Common/Thread/BaseThread, linker_section: .rdata$r }
+      - [0xDA8780, rdata]
+      - { start: 0xDA88B4, type: .rdata, name: Engine/Vfx/Common/Thread/UnlockCondition, linker_section: .rdata$r }
+      - { start: 0xDA8908, type: .rdata, name: Engine/Vfx/Common/Thread/ThreadManager, linker_section: .rdata$r }
+      - [0xDA891C, rdata]
+      - { start: 0xDA9F00, type: .rdata, name: Engine/Vfx/Common/Io/Printer, linker_section: .xdata$x }
+      - { start: 0xDA9F58, type: .rdata, name: Engine/Vfx/Common/Memory/Memory, linker_section: .xdata$x }
+      - [0xDA9FB0, rdata]
+      - { start: 0xE2CDE0, type: .rdata, name: crt/free, linker_section: .xdata$x }
+      - { start: 0xE2CE00, type: .rdata, name: crt/ehvecctr, linker_section: .xdata$x }
+      - [0xE2CE1C, rdata]
+      - { start: 0xE2CE80, type: .rdata, name: crt/fseek, linker_section: .xdata$x }
+      - [0xE2CE9C, rdata]
+      - { start: 0xE2CF08, type: .rdata, name: crt/fprintf, linker_section: .xdata$x }
+      - [0xE2CF24, rdata]
+      - { start: 0xE2CF28, type: .rdata, name: crt/ftell, linker_section: .xdata$x }
+      - [0xE2CF44, rdata]
+      - { start: 0xE2CF48, type: .rdata, name: crt/getenv, linker_section: .xdata$x }
+      - [0xE2CFA4, rdata]
+      - { start: 0xE2CFA8, type: .rdata, name: crt/realloc, linker_section: .xdata$x }
+      - [0xE2CFC4, rdata]
+      - { start: 0xE2D668, type: .rdata, name: crt/tzset, linker_section: .xdata$x }
+      - [0xE2D6C4, rdata]
+      - { start: 0xE5B894, type: .rdata, name: Sqex/Socket/SocketWinsock, linker_section: .xdata$x }
+      - [0xE5B914, rdata]
+      - { start: 0xE5F0B8, type: .rdata, name: crt/threadex, linker_section: .xdata$x }
+      - [0xE5F0D4, rdata]
+      - { start: 0xE5F0D8, type: .rdata, name: crt/eh3valid, linker_section: .xdata$x }
+      - [0xE5F0F4, rdata]
+      - { start: 0xE5F244, type: .rdata, name: Engine/Cut/Plugins/ScheduleActor, linker_section: .xdata$x }
+      - [0xE5F300, rdata]
+      - { start: 0xE5F430, type: .rdata, name: Engine/Cut/Plugins/ScheduleClip, linker_section: .xdata$x }
+      - [0xE5F4A0, rdata]
+      - { start: 0xE61A50, type: .rdata, name: Engine/Vfx/Common/Thread/BaseThread, linker_section: .xdata$x }
+      - [0xE61A5C, rdata]
+      - { start: 0xE61AB4, type: .rdata, name: Engine/Vfx/Common/Thread/UnlockCondition, linker_section: .xdata$x }
+      - { start: 0xE61AE0, type: .rdata, name: Engine/Vfx/Common/Thread/ThreadManager, linker_section: .xdata$x }
+      - [0xE61B0C, rdata]
+
+  - name: data
+    type: code
+    start: 0xE65000
+    vram: 0x1265000
+    subsegments:
+      - [0xE65000, data]
+      - { start: 0xE653C4, type: .data, name: Engine/Memory/modules/SystemHeap }
+      - { start: 0xE653F8, type: .data, name: Engine/Memory/modules/ComplexLink }
+      - [0xE6542C, data]
+      - { start: 0xE65F48, type: .data, name: Engine/Vfx/Common/Io/Printer }
+      - { start: 0xE65FC0, type: .data, name: Engine/Vfx/Common/Memory/MemoryMap }
+      - [0xE660D8, data]
+      - { start: 0xE68538, type: .data, name: openssl/rsa_err }
+      - [0xE68850, data]
+      - { start: 0xE68C10, type: .data, name: openssl/v3_enum }
+      - [0xE68C94, data]
+      - { start: 0xE68C98, type: .data, name: openssl/v3_bitst }
+      - [0xE68D80, data]
+      - { start: 0xEEA8B0, type: lib, name: crt/gs_cookie, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/gs_cookie.obj, linker_section: .data }
+      - [0xEEA8B8, data]
+      - { start: 0xEEAB60, type: .data, name: crt/cos }
+      - { start: 0xEEAB70, type: .data, name: crt/sin }
+      - { start: 0xEEAB80, type: .data, name: crt/tan }
+      - [0xEEAB88, data]
+      - { start: 0xEEAD50, type: .data, name: crt/atan }
+      - { start: 0xEEAD60, type: .data, name: crt/acos }
+      - { start: 0xEEAD70, type: .data, name: crt/87fmod }
+      - [0xEEADC0, data]
+      - { start: 0xEEADD0, type: .data, name: crt/log10 }
+      - { start: 0xEEADE0, type: .data, name: crt/pow }
+      - [0xEEADEC, data]
+      - { start: 0xEEB3E0, type: lib, name: crt/glstatus, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/glstatus.obj, linker_section: .data }
+      - [0xEEB3E4, data]
+      - { start: 0xEEB860, type: .data, name: crt/87disp }
+      - [0xEEB88C, data]
+      - { start: 0xEEBA44, type: .data, name: crt/tzset }
+      - [0xEEBA5C, data]
+      - { start: 0xEEBA60, type: .data, name: crt/timeset }
+      - [0xEEBAF8, data]
+      - { start: 0xEEBB00, type: lib, name: crt/days, library: third_party/crt/libcmt.lib, object: days.obj, linker_section: .data }
+      - [0xEEBB68, data]
+      - { start: 0xEEBB80, type: .data, name: crt/87triga }
+      - [0xEEBBD0, data]
+      - { start: 0xEEBD00, type: .data, name: crt/adj_fdiv }
+      - { start: 0xEEBE60, type: .data, name: crt/87tran }
+      - [0xEEBEBC, data]
+      - { start: 0xEEBFD8, type: lib, name: crt/constpow, library: third_party/crt/libcmt.lib, object: constpow.obj, linker_section: .data }
+      - [0xEEC294, data]
+      - { start: 0xF0F458, type: .data, name: zlib/trees }
+      - { start: 0xF0F494, type: .data, name: zlib/gvmat32c }
+      - { start: 0xF0F4A0, type: .data, name: zlib/inffas32 }
+      - [0xF0F4A4, data]
+      - { start: 0xF1DEC0, type: .data, name: crt/asin }
+      - { start: 0xF1DED0, type: .data, name: crt/log }
+      - [0xF1DED4, data]
+      - { start: 0xF1E128, type: .data, name: Engine/Cut/Plugins/ScheduleActor }
+      - [0xF1E1D8, data]
+      - { start: 0xF1E550, type: .data, name: Engine/Cut/Plugins/ScheduleClip }
+      - [0xF1E5F8, data]
+      - { start: 0xF1E9B8, type: .data, name: Engine/Cut/Plugins/KillClip }
+      - [0xF1EA58, data]
+      - { start: 0xF220A8, type: .data, name: Engine/Vfx/Common/Thread/BaseThread }
+      - [0xF220E4, data]
+      - { start: 0xF221E8, type: .data, name: Engine/Vfx/Common/Thread/UnlockCondition }
+      - [0xF2222C, data]
+      - { start: 0xF23140, type: .data, name: crt/87trigh }
+      - [0xF231AC, data]
+
+  - name: bss
+    type: code
+    start: 0xF24000
+    vram: 0x1324000
+    bss_size: 0x58940
+    subsegments:
+      - { type: bss, vram: 0x1324000 }
+      - { type: .bss, vram: 0x1328090, name: Engine/Vfx/Common/Io/Printer }
+      - { type: bss, vram: 0x1328130 }
+      - { type: .bss, vram: 0x1328D50, name: Engine/Vfx/Common/Memory/Memory }
+      - { type: bss, vram: 0x1328D84 }
+      - { type: .bss, vram: 0x1363F1C, name: crt/invarg }
+      - { type: bss, vram: 0x1363F20 }
+      - { type: .bss, vram: 0x1363FD0, name: crt/gs_report }
+      - { type: bss, vram: 0x13642F4 }
+      - { type: lib, vram: 0x13648C4, name: crt/_newmode, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/_newmode.obj, linker_section: .bss }
+      - { type: bss, vram: 0x13648C8 }
+      - { type: .bss, vram: 0x13648D0, name: crt/tzset }
+      - { type: bss, vram: 0x1364988 }
+      - { type: .bss, vram: 0x137B338, name: crt/eh3valid }
+      - { type: bss, vram: 0x137B45C }
+      - { type: .bss, vram: 0x137B718, name: Engine/Vfx/Common/Thread/BaseThread }
+      - { type: bss, vram: 0x137B728 }
+
+  - name: tls
+    type: code
+    start: 0xF24000
+    vram: 0x137D000
+    subsegments:
+      - [0xF24000, data]
+
+  - name: rsrc
+    type: code
+    start: 0xF25000
+    vram: 0x137E000
+    subsegments:
+      - [0xF25000, bin]
+
+  - name: certificate
+    type: bin
+    start: 0xF40000
+    linker_entry: False
+
+  - [0xF41788]

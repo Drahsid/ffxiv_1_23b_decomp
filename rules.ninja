@@ -1,0 +1,46 @@
+game_flags = /Zl /W3 /O2 /Gy- /EHsc /GR /MT /arch:SSE2 /DWIN32 /DNDEBUG /D_WINDOWS /I "$root/include"
+zlib_flags = /O2 /Ob1 /GF /Gy /GS- /MT /DWIN32 /DZLIB_WINAPI /D_CRT_NONSTDC_NO_DEPRECATE /D_CRT_SECURE_NO_DEPRECATE $
+  /DASMV /DASMINF /I "$root/third_party/zlib" /I "$root/third_party/zlib/contrib/masmx86"
+lua_flags = /O2 /Gy- /GF- /GS /EHsc /MT /TP
+openssl_flags = /MT /Ox /O2 /Ob2 /W3 /Gs0 /GF /Gy /Zl -DOPENSSL_THREADS -DDSO_WIN32 -DOPENSSL_SYSNAME_WIN32 $
+  -DWIN32_LEAN_AND_MEAN -DL_ENDIAN -D_CRT_SECURE_NO_DEPRECATE -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 $
+  -DOPENSSL_BN_ASM_MONT -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DWHIRLPOOL_ASM $
+  -DOPENSSL_NO_RC5 -DOPENSSL_NO_MD2 -DOPENSSL_NO_KRB5 -DOPENSSL_NO_JPAKE -DOPENSSL_NO_STATIC_ENGINE $
+  /I "$root/build/third_party/openssl/include"
+
+msvc = $root/tools/msvc8.0sp1
+directory = .
+
+rule as
+  command = as --32 -o $out $in
+  description = as $in
+
+rule bin
+  command = ld -m i386pe -r -b binary -o $out $in
+  description = bin $in
+
+rule cc
+  command = cmd /c "cd /d "$directory" && "$msvc/bin/cl.exe" /nologo /c $flags /X $
+    /I "$msvc/include" /I "$msvc/PlatformSDK/Include" $
+    /showIncludes /Fo"$root/$out" "$source""
+  description = cc $in
+  deps = msvc
+
+rule perlasm
+  command = cmd /c "perl $in win32 -DOPENSSL_IA32_SSE2 > $out"
+  description = perlasm $in
+
+rule ml
+  command = "$msvc/bin/ml.exe" /nologo /Cp /coff /c /Cx /Fo$out $in
+  description = ml $in
+
+rule lib
+  command = "$msvc/bin/link.exe" /lib /nologo /out:$out $in
+  description = lib $out
+
+# Strip after linking to avoid error on ld's .rsrc size check
+rule ld
+  command = cmd /c "ld -m i386pe -T build/ffxivgame.ld -Map build/ffxivgame.map --image-base 0x400000 $
+    --section-alignment 0x1000 --file-alignment 0x1000 --disable-reloc-section -e _WinMainCRTStartup -o $out && strip -s $out"
+  description = ld $out
+
