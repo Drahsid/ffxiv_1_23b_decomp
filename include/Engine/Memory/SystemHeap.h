@@ -22,6 +22,7 @@ public:
     virtual u32 Get_Allocation_Size(AllocationParameters* parameters, void* memory);
     virtual IModule* func_004105B0();
     virtual u32 func_00AB7340();
+
     virtual u32 Get_Payload_Size(void* memory) {
         return (static_cast<AllocationHeader*>(memory) - 1)->payloadSize;
     }
@@ -29,6 +30,7 @@ public:
     virtual u32 func_0040EE80(void* memory) {
         return (static_cast<AllocationHeader*>(memory) - 1)->Get_Footer()->unk_0C;
     }
+
     virtual bool Has_Allocations();
 
     u32 Get_Used_Bytes();

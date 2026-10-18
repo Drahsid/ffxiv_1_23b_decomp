@@ -1,5 +1,5 @@
-#include "asm.h"
 #include "Engine/Vfx/Common/Thread/ThreadManager.h"
+#include "Engine/Vfx/Common/Thread/BaseThread.h"
 #include "Engine/Vfx/Common/Map/UsIntMap.h"
 #include "Engine/Vfx/Common/Memory/Memory.h"
 #include <windows.h>
@@ -11,7 +11,14 @@ namespace Vfx {
 namespace Common {
 namespace Thread {
 
-INCLUDE_ASM("asm/nonmatchings/Engine/Vfx/Common/Thread/ThreadManager/00E3C450.s");
+ThreadManager::~ThreadManager() {
+    u32 count = unk_14->Get_Count();
+    for (u32 index = 0; index < count; index++) {
+        u32* entry = static_cast<u32*>(unk_14->Get_Entry(index));
+        delete reinterpret_cast<BaseThread*>(entry[1]);
+    }
+    delete unk_14;
+}
 
 s32 ThreadManager::Get_Processor_Count(u32* affinity_mask) {
     HANDLE process = GetCurrentProcess();

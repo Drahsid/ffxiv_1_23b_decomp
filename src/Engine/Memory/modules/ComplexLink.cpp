@@ -50,8 +50,8 @@ void* ComplexLink::Allocate(AllocationParameters* parameters, u32 size, const u3
                     remainder->size = remainder_size;
                     Block* next = remainder->Get_Next();
                     next->previousSize = remainder->size;
-                    Block* tail = bins[Get_Bin_Index(remainder->size)].Get_Next();
-                    tail->previous->Insert_After(remainder);
+                    Block* bin_end = bins[Get_Bin_Index(remainder->size)].Get_Next();
+                    bin_end->previous->Insert_After(remainder);
                 }
 
                 allocated->owner = parameters;
@@ -163,7 +163,7 @@ void ComplexLink::CheckConsistency(AllocationParameters* parameters) {
             Block* right = block->Get_Previous()->Get_Next();
             LOG_ASSERT_AT(".\\modules\\ComplexLink.cpp", 148, left == right, "");
         }
-        
+
         previous = block;
         block = block->Get_Next();
     }

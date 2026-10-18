@@ -14,7 +14,7 @@ Allocation_Callback gAllocationCallback = 0;
 Free_Callback gFreeCallback = 0;
 extern "C" void (*D_01328D70)(void* arg0) = 0;
 Size_Callback gSizeCallback = 0;
-extern "C" void (*D_01328D78)() = 0;
+extern "C" void (*D_01328D78)(bool) = 0;
 bool gTrackStats = false;
 extern "C" u8 D_01328D7D = 0;
 SQEX::CDev::Engine::Vfx::Common::Memory::MemoryMap* gMemoryMap = 0;
@@ -71,7 +71,7 @@ extern "C" void func_00416380() {
     D_01328D8C = 0;
 }
 
-extern "C" void* func_00416390(u32 size, u32 arg1, u32 alignment, const char* function, const char* file, s32 line) {
+extern "C" void* func_00416390(u32 size, u32 arg1, s32 alignment, const char* function, const char* file, s32 line) {
     return malloc(size);
 }
 
@@ -88,7 +88,7 @@ extern "C" u32 func_004163D0(void* memory) {
     return 0;
 }
 
-extern "C" void func_004163E0() {
+extern "C" void func_004163E0(bool arg0) {
 }
 
 extern "C" void func_004163F0() {
@@ -99,7 +99,7 @@ void func_00416400(
     Free_Callback free_callback,
     void (*arg2)(void*),
     Size_Callback size_callback,
-    void (*arg4)()
+    void (*arg4)(bool)
 ) {
     if (!gAllocationCallback) {
         gAllocationCallback = allocation_callback;
@@ -112,7 +112,7 @@ void func_00416400(
     }
 }
 
-void* func_00416480(u32 size, u32 arg1, u32 alignment, const char* function, const char* file, s32 line) {
+void* func_00416480(u32 size, u32 arg1, s32 alignment, const char* function, const char* file, s32 line) {
     if (!gAllocationCallback) {
         func_00416400(func_00416390, func_004163A0, func_004163C0, func_004163D0, func_004163E0);
     }

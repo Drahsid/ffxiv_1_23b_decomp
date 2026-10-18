@@ -116,7 +116,7 @@ void ScheduleActor::OnEnter(Scheduler::ClipBase* clip, IClipListenerHolder* list
     unk_70.func_00A03C00(scheduler.get());
     scheduler->unk_B8 = &unk_70;
     unk_6C = parameter->func_00A20070();
-    
+
     Scheduler::Scheduler::ListenerIterator listener_iterator(unk_6C);
     while (listener_iterator.func_00A1CDE0()) {
         scheduler->func_00A1BC60(listener_iterator.func_00A1BF80());
@@ -125,7 +125,7 @@ void ScheduleActor::OnEnter(Scheduler::ClipBase* clip, IClipListenerHolder* list
 
     unk_60 = 2;
     unk_64 = 2;
-    Scheduler::ScheduleDataTransfer transfer(unk_6C->unk_F0, unk_6C->unk_1B4);
+    Scheduler::ScheduleDataTransfer transfer(&unk_6C->registers, unk_6C->unk_1B4);
     scheduler->func_00A1BF60(&unk_70, &transfer);
     scheduler->func_00A1CE70(Scheduler::Float4(unk_6C->func_00A1C040()));
     scheduler->func_00A1CE20(Scheduler::Float4(unk_6C->func_00A1C030()));

@@ -1,8 +1,6 @@
 #ifndef ENGINE_CUT_PLUGINS_I_CUT_RESOURCE_LISTENER_H
 #define ENGINE_CUT_PLUGINS_I_CUT_RESOURCE_LISTENER_H
 
-#include "types.h"
-
 namespace SQEX {
 namespace CDev {
 namespace Engine {

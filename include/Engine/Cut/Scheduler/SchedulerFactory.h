@@ -2,7 +2,7 @@
 #define ENGINE_CUT_SCHEDULER_SCHEDULER_FACTORY_H
 
 #include "Engine/Cut/Common/CutSceneMemoryObject.h"
-#include "Engine/Cut/Scheduler/ClipBase.h"
+#include "Engine/Common/Misc/NonCopyable.h"
 #include "types.h"
 #include <memory>
 

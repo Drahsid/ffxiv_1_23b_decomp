@@ -18,7 +18,7 @@ public:
     virtual void Clear();
     virtual u32 Get_Allocation_Size();
 
-    s32 func_004166E0(void* memory, u32 category, u32 size, u32 arg3);
+    s32 func_004166E0(void* memory, u32 category, u32 arg2, u32 arg3);
     bool func_00416750(void* memory);
     void* func_004167A0(void* memory);
     void* func_004167B0(u32 index);
@@ -26,8 +26,8 @@ public:
 private:
     struct Category_Statistics {
         u32 count;
-        u32 allocationCount;
-        u32 size;
+        u32 insertionCount;
+        u32 unk_08;
     };
 
     union Entry_Value {

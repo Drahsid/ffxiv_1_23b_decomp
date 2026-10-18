@@ -2,7 +2,7 @@
 #define ENGINE_CUT_CUT_SCENE_PLAYER_CUT_SCENE_OBJECT_H
 
 #include "Engine/Cut/Common/CutSceneMemoryObject.h"
-#include "Engine/Cut/Scheduler/ClipBase.h"
+#include "Engine/Common/Misc/NonCopyable.h"
 #include "types.h"
 
 namespace SQEX {

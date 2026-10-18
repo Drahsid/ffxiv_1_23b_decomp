@@ -30,26 +30,20 @@ COMPILER_INPUTS = [
 ]
 
 TU_FLAGS = {
-    "Engine/Cut/Plugins/KillClip": ("/GS-", False),
-    "Engine/Cut/Plugins/ScheduleActor": ("/GS-", True),
-    "Engine/Cut/Plugins/ScheduleClip": ("/GS-", True),
-    "17640": ("/GS", True),
-    "Engine/Dw/RenderInterface/D3d9/Rapture/MemoryPool": ("/GS", True),
-    "Engine/Memory/modules/SystemHeap": ("/GS-", False),
-    "Engine/Memory/modules/ComplexLink": ("/GS-", True),
-    "Engine/Vfx/Common/Io/Printer": ("/GS-", False),
-    "Engine/Vfx/Common/Memory/Memory": ("/GS-", False),
-    "Engine/Vfx/Common/Memory/MemoryMap": ("/GS-", False),
-    "Engine/Vfx/Common/Map/BaseMap": ("/GS-", False),
-    "Engine/Vfx/Common/Thread/BaseThread": ("/GS-", False),
-    "Engine/Vfx/Common/Thread/UnlockCondition": ("/GS-", False),
-    "Engine/Vfx/Common/Thread/ThreadManager": ("/GS-", False),
-    "Sqex/Socket/SocketWinsock": ("/GS /GF-", True),
+    "Engine": "/GS-",
+    "Engine/Dw/RenderInterface": "/Gy /GS /GF-",
+    "Engine/Dw/Renderer": "/Gy /GS",
+    "Engine/Vfx/Qix/Data/UnitInstance_Data": "/Gy /GS-",
+    "Engine/Vfx/Qix/Graph": "/Gy /GS-",
+    "Engine/Vfx/Qix/Graph/BaseGenesisBuffer": "/GS- /EHc-",
+    "Sqex/Socket": "/GS /GF-",
 }
 
+TU_FLAGS_DEFAULT = "/GS"
+
 PCH = {
-    flags: Path("build/pch") / ("memory_" + flags.replace("/", "").replace(" ", "_") + ".pch")
-    for flags, use_pch in TU_FLAGS.values() if use_pch
+    flags: Path("build/pch") / ("new" + flags.replace("/", "_").replace(" ", "") + ".pch")
+    for flags in sorted(set(TU_FLAGS.values()) | {"/GS"})
 }
 
 
@@ -148,6 +142,13 @@ def write_library(ninja, library, sources, flags, entries):
     ninja.build(library.as_posix(), "lib", objects, implicit=COMPILER_INPUTS)
 
 
+def get_tu_flags(unit):
+    for path in (unit, *unit.parents):
+        if path.as_posix() in TU_FLAGS:
+            return TU_FLAGS[path.as_posix()]
+    return TU_FLAGS_DEFAULT
+
+
 def write_objects(ninja, entries):
     objects = [entry.object_path.as_posix() for entry in entries]
     compile_targets = set()
@@ -162,13 +163,11 @@ def write_objects(ninja, entries):
                 compile_targets.add(segment.library.as_posix())
         else:
             compiled = path.with_suffix(".obj")
-            flags, use_pch = TU_FLAGS.get((segment.dir / segment.name).as_posix(), ("/GS", False))
-            compiler_inputs = COMPILER_INPUTS + ([PCH[flags].as_posix()] if use_pch else [])
-            pch_flags = f" /Yumemory /FImemory /Fp{PCH[flags]}" if use_pch else ""
+            flags = get_tu_flags(segment.dir / segment.name)
 
             ninja.build(
-                compiled.as_posix(), "cc", source.as_posix(), implicit=compiler_inputs,
-                variables={"flags": "$game_flags " + flags + pch_flags, "source": source.as_posix()},
+                compiled.as_posix(), "cc", source.as_posix(), implicit=COMPILER_INPUTS + [PCH[flags].as_posix()],
+                variables={"flags": f"$game_flags {flags} /Yunew /FInew /Fp{PCH[flags]}", "source": source.as_posix()},
             )
 
             for assembly in assembly_includes(source):
@@ -188,7 +187,7 @@ def write_build_script(entries):
             ninja.build(
                 pch.with_suffix(".obj").as_posix(), "cc", "src/pch.cpp", implicit=COMPILER_INPUTS,
                 implicit_outputs=[pch.as_posix()],
-                variables={"source": "src/pch.cpp", "flags": f"$game_flags {flags} /Ycmemory /Fp{pch}"},
+                variables={"source": "src/pch.cpp", "flags": f"$game_flags {flags} /Ycnew /Fp{pch}"},
             )
 
         objects, compile_targets = write_objects(ninja, entries)
@@ -258,7 +257,11 @@ if __name__ == "__main__":
         split.main([YAML], modes=["all"], verbose=False, use_cache=False)
     if args.build:
         subprocess.run(["ninja"], check=True)
-        image = Path("assets/header.bin").read_bytes() + Path("build/ffxivgame.pe").read_bytes()[0x1000:] + Path("assets/certificate.bin").read_bytes()
+        image = (
+            Path("assets/header.bin").read_bytes()
+            + Path("build/ffxivgame.pe").read_bytes()[0x1000:]
+            + Path("assets/certificate.bin").read_bytes()
+        )
         Path("build/ffxivgame.exe").write_bytes(image)
         if image != TARGET.read_bytes():
             sys.exit("build/ffxivgame.exe: FAILED")

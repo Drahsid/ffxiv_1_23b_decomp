@@ -19,6 +19,7 @@ public:
     virtual ~ClipParameter();
     IScheduleActor* func_00A1FFA0(s32 index);
     ClipBase* Get_Clip(s32 index);
+    s32 func_00A1FFC0();
     ResourceReference* func_00A20040();
     u32 func_00A20050();
     u32 func_00A20060();

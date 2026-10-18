@@ -1,7 +1,7 @@
 #ifndef ENGINE_COMMON_I_SCENE_OBJECT_I_ACTOR_LISTENER_H
 #define ENGINE_COMMON_I_SCENE_OBJECT_I_ACTOR_LISTENER_H
 
-#include "Engine/Cut/Scheduler/ClipBase.h"
+#include "Engine/Common/ISceneObject.h"
 
 namespace SQEX {
 namespace CDev {

@@ -9,6 +9,7 @@ namespace CDev {
 namespace Engine {
 namespace Vfx {
 namespace Common {
+
 namespace Map {
 
 class UsIntMap;

@@ -290,12 +290,23 @@ bool BaseMap::Remove_At(u32 index) {
 }
 
 void BaseMap::func_00416DF0() {
-    Io::func_00415F70(Io::Printer::func_00415C90(), "[BaseMap] debug print start.  (%d / %d) ---------", static_cast<s32>(count), static_cast<s32>(capacity));
+    Io::func_00415F70(
+        Io::Printer::func_00415C90(),
+        "[BaseMap] debug print start.  (%d / %d) ---------",
+        static_cast<s32>(count),
+        static_cast<s32>(capacity)
+    );
     u32* record = reinterpret_cast<u32*>(records);
     if (record) {
         for (u32 index = 0; index < count; index++) {
             const u8* entry_value = reinterpret_cast<u8*>(record) + keySize;
-            Io::func_00415F70(Io::Printer::func_00415C90(), "\tx%04x\tx%08x, x%08x", index, reinterpret_cast<u32>(record), reinterpret_cast<u32>(entry_value));
+            Io::func_00415F70(
+                Io::Printer::func_00415C90(),
+                "\tx%04x\tx%08x, x%08x",
+                index,
+                reinterpret_cast<u32>(record),
+                reinterpret_cast<u32>(entry_value)
+            );
             record++;
         }
         Io::func_00415F70(Io::Printer::func_00415C90(), "[BaseMap] debug print end.   --------------------");
@@ -397,7 +408,7 @@ bool BaseMap::Realloc_(u32 capacity) {
         memcpy(storage, records, size); // BUG: Growth can read past the old allocation
         func_004162C0(records);
     }
-    
+
     records = storage;
     this->capacity = capacity;
     return true;

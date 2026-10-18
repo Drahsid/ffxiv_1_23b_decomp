@@ -1,14 +1,13 @@
 #ifndef ENGINE_CUT_PLUGINS_I_CLIP_LISTENER_HOLDER_H
 #define ENGINE_CUT_PLUGINS_I_CLIP_LISTENER_HOLDER_H
 
-#include "types.h"
-
 namespace SQEX {
 namespace CDev {
 namespace Engine {
 namespace Cut {
 namespace Plugins {
 
+class ICutEffectListener;
 class ICutResourceListener;
 
 class IClipListenerHolder {
@@ -16,7 +15,7 @@ public:
     virtual void* func_008D5570() = 0;
     virtual void* func_007143E0() = 0;
     virtual void* func_00CB1C80() = 0;
-    virtual void* func_00A29AA0() = 0;
+    virtual ICutEffectListener* func_00A29AA0() = 0;
     virtual void* func_00C4BAE0() = 0;
     virtual void* func_00410780() = 0;
     virtual void* func_0060DE70() = 0;

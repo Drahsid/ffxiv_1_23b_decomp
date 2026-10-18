@@ -2,26 +2,13 @@
 #define ENGINE_CUT_SCHEDULER_SCHEDULE_DATA_TRANSFER_H
 
 #include "Engine/Cut/Common/CutSceneMemoryObject.h"
-#include "Engine/Cut/Scheduler/ClipBase.h"
+#include "Engine/Common/ISceneObject/IScheduleDataTransfer.h"
+#include "Engine/Common/Misc/NonCopyable.h"
 #include "types.h"
 
 namespace SQEX {
 namespace CDev {
 namespace Engine {
-
-namespace Common {
-
-class ISceneObject::IScheduleDataTransfer {
-public:
-    virtual ~IScheduleDataTransfer() {
-    }
-
-    virtual void func_007143E0() = 0;
-    virtual void func_00CB1C80() = 0;
-};
-
-} // namespace Common
-
 namespace Cut {
 namespace Scheduler {
 

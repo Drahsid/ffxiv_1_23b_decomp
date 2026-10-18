@@ -23,7 +23,7 @@ public:
     virtual const void* GetData() {
         const KILL_CLIP_DATA* data = static_cast<const KILL_CLIP_DATA*>(mClipData);
         u32 size = sizeof(KILL_CLIP_DATA) + (data->targetCount - 1) * sizeof(s16);
-        return reinterpret_cast<const u8*>(mClipData) + ((size + 3) & ~3);
+        return reinterpret_cast<const u8*>(data) + ((size + 3) & ~3);
     }
 
     virtual void OnEnter(Scheduler::ClipParameter* parameter) {

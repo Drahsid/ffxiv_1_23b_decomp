@@ -13,7 +13,7 @@ MemoryMap::MemoryMap(u32 capacity, u32 arg1, bool embedded)
     for (u32 index = 0; index < 256; index++) {
         Category_Statistics* statistics = &categories[index];
         statistics->count = 0;
-        statistics->allocationCount = 0;
+        statistics->insertionCount = 0;
     }
 }
 
@@ -24,12 +24,12 @@ void MemoryMap::Clear() {
     count = 0;
 }
 
-s32 MemoryMap::func_004166E0(void* memory, u32 category, u32 size, u32 arg3) {
+s32 MemoryMap::func_004166E0(void* memory, u32 category, u32 arg2, u32 arg3) {
     if (count == capacity) {
         return 1;
     }
 
-    u32 total = unk_C18 + size;
+    u32 total = unk_C18 + arg2;
     Entry_Value value;
     value.packedValue = total & 0xFFFFFF;
     value.category = category;
@@ -37,8 +37,8 @@ s32 MemoryMap::func_004166E0(void* memory, u32 category, u32 size, u32 arg3) {
     if (!result) {
         Category_Statistics* entry = &categories[category];
         entry->count++;
-        entry->allocationCount++;
-        entry->size += total;
+        entry->insertionCount++;
+        entry->unk_08 += total;
     }
     return result;
 }
@@ -56,7 +56,7 @@ bool MemoryMap::func_00416750(void* memory) {
     if (removed) {
         Category_Statistics* statistics = &categories[category];
         statistics->count--;
-        statistics->size -= packed_value & 0xFFFFFF;
+        statistics->unk_08 -= packed_value & 0xFFFFFF;
     }
     
     return removed;

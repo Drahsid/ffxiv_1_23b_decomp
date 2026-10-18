@@ -83,7 +83,7 @@ void* SystemHeap::Realloc(AllocationParameters* parameters, void* memory, u32 si
             usedBytes += allocation_size;
         }
     }
-    
+
     // BUG: Returns freed memory after successful reallocation
     return memory;
 }
@@ -121,21 +121,9 @@ SystemHeap::SystemHeap(void* arg0)
 }
 
 void SystemHeap::Set_Callbacks(AllocateCallback allocate, FreeCallback free, ReallocateCallback reallocate) {
-    if (!allocate) {
-        allocate = System::Allocate;
-    }
-
-    allocateCallback = allocate;
-    if (!free) {
-        free = System::Free;
-    }
-
-    freeCallback = free;
-    if (!reallocate) {
-        reallocate = System::Realloc;
-    }
-    
-    reallocateCallback = reallocate;
+    allocateCallback = allocate ? allocate : System::Allocate;
+    freeCallback = free ? free : System::Free;
+    reallocateCallback = reallocate ? reallocate : System::Realloc;
 }
 
 } // namespace Memory

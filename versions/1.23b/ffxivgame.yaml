@@ -44,19 +44,19 @@ segments:
       - [0xEAB0, cpp, Engine/Memory/modules/SystemHeap]
       - [0xEE90, cpp, Engine/Memory/modules/ComplexLink]
       - [0xF560, asm]
+      - [0x14F50, cpp, Engine/CDevVfx/Common/Memory/Malloc]
       - [0x152C0, cpp]
       - [0x15420, cpp, Engine/Vfx/Common/Io/Printer]
       - [0x162A0, cpp, Engine/Vfx/Common/Memory/Memory]
       - [0x16660, cpp, Engine/Vfx/Common/Memory/MemoryMap]
       - [0x16810, cpp, Engine/Vfx/Common/Map/BaseMap]
       - [0x17420, cpp, Engine/Vfx/Common/Map/UsIntMap]
-      - [0x17640, cpp]
-      - [0x17660, cpp, Engine/Dw/RenderInterface/D3d9/Rapture/MemoryPool]
+      - [0x17640, cpp, Engine/Dw/RenderInterface/D3d9/Rapture/MemoryPool]
       - [0x18050, asm]
       - { start: 0x5CB10, type: lib, name: openssl/rsa_err, library: build/third_party/openssl/libeay32.lib, object: rsa_err.obj }
       - [0x5CB40, asm]
       - { start: 0x5D490, type: lib, name: openssl/p_verify, library: build/third_party/openssl/libeay32.lib, object: p_verify.obj }
-      - [0x5D620, asm]
+      - { start: 0x5D620, type: lib, name: openssl/m_md5, library: build/third_party/openssl/libeay32.lib, object: m_md5.obj }
       - { start: 0x5D660, type: lib, name: openssl/p_sign, library: build/third_party/openssl/libeay32.lib, object: p_sign.obj }
       - [0x5D814, asm]
       - { start: 0x60F70, type: lib, name: openssl/tasn_fre, library: build/third_party/openssl/libeay32.lib, object: tasn_fre.obj }
@@ -67,6 +67,8 @@ segments:
       - [0x696A4, asm]
       - { start: 0x6ACE0, type: lib, name: openssl/rsa_sign, library: build/third_party/openssl/libeay32.lib, object: rsa_sign.obj }
       - [0x6B324, asm]
+      - { start: 0x6B330, type: lib, name: openssl/md5_dgst, library: build/third_party/openssl/libeay32.lib, object: md5_dgst.obj }
+      - [0x6B564, asm]
       - { start: 0x6C200, type: lib, name: openssl/obj_lib, library: build/third_party/openssl/libeay32.lib, object: obj_lib.obj }
       - [0x6C440, asm]
       - { start: 0x6DAA0, type: lib, name: openssl/v3_alt, library: build/third_party/openssl/libeay32.lib, object: v3_alt.obj }
@@ -74,6 +76,8 @@ segments:
       - { start: 0x72C90, type: lib, name: openssl/bn_word, library: build/third_party/openssl/libeay32.lib, object: bn_word.obj }
       - { start: 0x72FD0, type: lib, name: openssl/bn_shift, library: build/third_party/openssl/libeay32.lib, object: bn_shift.obj }
       - [0x733A8, asm]
+      - { start: 0x744D0, type: .text, name: openssl/m_md5 }
+      - [0x744E0, asm]
       - { start: 0x78220, type: lib, name: openssl/bn_gcd, library: build/third_party/openssl/libeay32.lib, object: bn_gcd.obj }
       - [0x78C10, asm]
       - { start: 0x798C0, type: lib, name: openssl/bn_add, library: build/third_party/openssl/libeay32.lib, object: bn_add.obj }
@@ -96,6 +100,8 @@ segments:
       - [0x88CE8, asm]
       - { start: 0x88CF0, type: lib, name: openssl/mdc2dgst, library: build/third_party/openssl/libeay32.lib, object: mdc2dgst.obj }
       - [0x89014, asm]
+      - { start: 0x8AA90, type: .text, name: openssl/md5_dgst }
+      - [0x8AAC4, asm]
       - { start: 0x8B450, type: lib, name: openssl/cmll_cfb, library: build/third_party/openssl/libeay32.lib, object: cmll_cfb.obj }
       - { start: 0x8B510, type: lib, name: openssl/cmll_ecb, library: build/third_party/openssl/libeay32.lib, object: cmll_ecb.obj }
       - { start: 0x8B540, type: lib, name: openssl/cmll_ofb, library: build/third_party/openssl/libeay32.lib, object: cmll_ofb.obj }
@@ -193,6 +199,8 @@ segments:
       - { start: 0x5D29D0, type: lib, name: crt/chkstk, library: third_party/crt/libcmt.lib, object: chkstk.obj }
       - { start: 0x5D29FB, type: lib, name: crt/strcpy_s, library: third_party/crt/libcmt.lib, object: strcpy_s.obj }
       - [0x5D2A60, asm]
+      - { start: 0x5D4F08, type: lib, name: crt/sprintf, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/sprintf.obj }
+      - { start: 0x5D4FBE, type: lib, name: crt/strnicmp, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/cpp_obj/strnicmp.obj }
       - { start: 0x5D5110, type: lib, name: crt/memmove, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/memmove.obj }
       - { start: 0x5D5475, type: lib, name: crt/strncmp, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/strncmp.obj }
       - [0x5D5534, asm]
@@ -201,7 +209,8 @@ segments:
       - { start: 0x5D5790, type: lib, name: crt/lldiv, library: third_party/crt/libcmt.lib, object: lldiv.obj }
       - { start: 0x5D5840, type: lib, name: crt/llmul, library: third_party/crt/libcmt.lib, object: llmul.obj }
       - { start: 0x5D5880, type: lib, name: crt/ulldiv, library: third_party/crt/libcmt.lib, object: ulldiv.obj }
-      - [0x5D58E8, asm]
+      - { start: 0x5D58E8, type: lib, name: crt/vsnprnc, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/vsnprnc.obj }
+      - { start: 0x5D5B76, type: lib, name: crt/malloc, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/malloc.obj }
       - { start: 0x5D5C88, type: lib, name: crt/free, library: third_party/crt/libcmt.lib, object: free.obj }
       - { start: 0x5D5D20, type: lib, name: crt/qsort, library: third_party/crt/libcmt.lib, object: qsort.obj }
       - { start: 0x5D6090, type: lib, name: crt/strstr, library: third_party/crt/libcmt.lib, object: strstr.obj }
@@ -231,29 +240,47 @@ segments:
       - [0x5D88F8, asm]
       - { start: 0x5D8BE0, type: lib, name: crt/alloca16, library: third_party/crt/libcmt.lib, object: alloca16.obj }
       - [0x5D8C0C, asm]
+      - { start: 0x5D9970, type: lib, name: crt/ulldvrm, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/ulldvrm.obj }
+      - { start: 0x5D9A05, type: lib, name: crt/sscanf, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/sscanf.obj }
       - { start: 0x5D9A90, type: lib, name: crt/ullshr, library: third_party/crt/libcmt.lib, object: ullshr.obj }
-      - [0x5D9AB0, asm]
+      - { start: 0x5D9AB0, type: lib, name: crt/ullrem, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/ullrem.obj }
+      - { start: 0x5D9B25, type: lib, name: crt/setmode, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/setmode.obj }
+      - [0x5D9D0C, asm]
       - { start: 0x5DA7D0, type: lib, name: crt/strcspn, library: third_party/crt/libcmt.lib, object: strcspn.obj }
       - { start: 0x5DA820, type: lib, name: crt/ceil_pentium4, library: third_party/crt/libcmt.lib, object: ceil_pentium4.obj }
       - [0x5DA940, asm]
       - { start: 0x5DAC40, type: lib, name: crt/atan, library: third_party/crt/libcmt.lib, object: atan.obj }
       - { start: 0x5DAD60, type: lib, name: crt/acos, library: third_party/crt/libcmt.lib, object: acos.obj }
       - [0x5DAEA8, asm]
+      - { start: 0x5DAEC4, type: lib, name: crt/ieeemisc, library: third_party/crt/libcmt.lib, object: ieeemisc.obj }
+      - [0x5DAFAC, asm]
       - { start: 0x5DAFB0, type: lib, name: crt/87fmod, library: third_party/crt/libcmt.lib, object: 87fmod.obj }
       - [0x5DAFE4, asm]
+      - { start: 0x5DAFF0, type: lib, name: crt/sqrt, library: third_party/crt/libcmt.lib, object: sqrt.obj }
+      - { start: 0x5DB0AA, type: lib, name: crt/difftm64, library: third_party/crt/libcmt.lib, object: difftm64.obj }
+      - [0x5DB0EC, asm]
       - { start: 0x5DB0F0, type: lib, name: crt/log10, library: third_party/crt/libcmt.lib, object: log10.obj }
       - { start: 0x5DB240, type: lib, name: crt/pow, library: third_party/crt/libcmt.lib, object: pow.obj }
       - { start: 0x5DB4D0, type: lib, name: crt/modf_pentium4, library: third_party/crt/libcmt.lib, object: modf_pentium4.obj }
       - [0x5DB618, asm]
       - { start: 0x5DBA20, type: lib, name: crt/strpbrk, library: third_party/crt/libcmt.lib, object: strpbrk.obj }
       - [0x5DBA60, asm]
+      - { start: 0x5DC3F0, type: lib, name: crt/strlen, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/strlen.obj }
+      - { start: 0x5DC47B, type: lib, name: crt/ehprolg3, library: third_party/crt/libcmt.lib, object: ../build/intel/mt_obj/ehprolg3.obj }
+      - { start: 0x5DC53D, type: lib, name: crt/initctyp, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/initctyp.obj }
+      - [0x5DC8F8, asm]
       - { start: 0x5DF700, type: lib, name: crt/lowhelpr, library: third_party/crt/libcmt.lib, object: lowhelpr.obj }
       - { start: 0x5DF74C, type: lib, name: crt/gs_report, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/gs_report.obj }
       - [0x5DF850, asm]
+      - { start: 0x5E0978, type: lib, name: crt/exsup4, library: third_party/crt/libcmt.lib, object: exsup4.obj }
+      - { start: 0x5E0ACB, type: lib, name: crt/heapinit, library: third_party/crt/libcmt.lib, object: heapinit.obj }
+      - [0x5E0B80, asm]
       - { start: 0x5E4E6C, type: lib, name: crt/gs_support, library: third_party/crt/libcmt.lib, object: gs_support.obj }
       - [0x5E4F00, asm]
       - { start: 0x5E5064, type: lib, name: crt/_flsbuf, library: third_party/crt/libcmt.lib, object: _flsbuf.obj }
-      - [0x5E51C4, asm]
+      - { start: 0x5E51C4, type: lib, name: crt/output, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/cpp_obj/output.obj }
+      - { start: 0x5E5B60, type: lib, name: crt/_strnicm, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/_strnicm.obj }
+      - { start: 0x5E5BC1, type: lib, name: crt/outputs, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/cpp_obj/outputs.obj }
       - { start: 0x5E6620, type: lib, name: crt/cos_pentium4, library: third_party/crt/libcmt.lib, object: cos_pentium4.obj }
       - { start: 0x5E67D0, type: lib, name: crt/87disp, library: third_party/crt/libcmt.lib, object: 87disp.obj }
       - { start: 0x5E69A0, type: lib, name: crt/common, library: third_party/crt/libcmt.lib, object: common.obj }
@@ -268,15 +295,61 @@ segments:
       - { start: 0x5EC400, type: lib, name: crt/acos_pentium4, library: third_party/crt/libcmt.lib, object: acos_pentium4.obj }
       - { start: 0x5EC960, type: lib, name: crt/87triga, library: third_party/crt/libcmt.lib, object: 87triga.obj }
       - [0x5ECA08, asm]
+      - { start: 0x5ECA10, type: lib, name: crt/87cdisp, library: third_party/crt/libcmt.lib, object: 87cdisp.obj }
+      - { start: 0x5ECC90, type: lib, name: crt/ldexp, library: third_party/crt/libcmt.lib, object: ldexp.obj }
+      - { start: 0x5ECE3E, type: lib, name: crt/util, library: third_party/crt/libcmt.lib, object: util.obj }
+      - { start: 0x5ECF72, type: lib, name: crt/fpexcept, library: third_party/crt/libcmt.lib, object: fpexcept.obj }
+      - { start: 0x5ED779, type: lib, name: crt/fpctrl, library: third_party/crt/libcmt.lib, object: fpctrl.obj }
       - { start: 0x5ED880, type: lib, name: crt/adj_fdiv, library: third_party/crt/libcmt.lib, object: adj_fdiv.obj }
       - { start: 0x5EE610, type: lib, name: crt/log10_pentium4, library: third_party/crt/libcmt.lib, object: log10_pentium4.obj }
       - { start: 0x5EE8A0, type: lib, name: crt/87tran, library: third_party/crt/libcmt.lib, object: 87tran.obj }
       - { start: 0x5EEAB0, type: lib, name: crt/pow_pentium4, library: third_party/crt/libcmt.lib, object: pow_pentium4.obj }
       - [0x5EF610, asm]
+      - { start: 0x5F62C0, type: lib, name: crt/lldvrm, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/lldvrm.obj }
+      - { start: 0x5F639F, type: lib, name: crt/crt0fp, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/crt0fp.obj }
       - { start: 0x5F63A8, type: lib, name: crt/contrlfp, library: third_party/crt/libcmt.lib, object: contrlfp.obj }
       - [0x5F6414, asm]
+      - { start: 0x5F6C88, type: lib, name: crt/ismbbyte, library: third_party/crt/libcmt.lib, object: ismbbyte.obj }
+      - { start: 0x5F6D01, type: lib, name: crt/isatty, library: third_party/crt/libcmt.lib, object: isatty.obj }
+      - { start: 0x5F6D5F, type: lib, name: crt/lseeki64, library: third_party/crt/libcmt.lib, object: lseeki64.obj }
+      - { start: 0x5F6EFB, type: lib, name: crt/printf, library: third_party/crt/libcmt.lib, object: printf.obj }
+      - [0x5F6FC0, asm]
       - { start: 0x5FC518, type: lib, name: crt/_flswbuf, library: third_party/crt/libcmt.lib, object: _flswbuf.obj }
       - [0x5FC688, asm]
+      - [0x63B6C0, cpp, Engine/Dw/SceneGraph/Resource/ReferencedResourceNodeFactory]
+      - [0x63B7E0, asm]
+      - [0x7D1340, cpp, Engine/Vfx/Qix/Data/UnitInstance_Data]
+      - [0x7D1C60, cpp, Engine/Vfx/Qix/Control/DefaultLeafControl]
+      - [0x7D20A0, cpp, Engine/Vfx/Qix/Data/ControlInstance_Data]
+      - [0x7D2360, cpp, Engine/Vfx/Qix/Data/UnitData_Data]
+      - [0x7D2C10, asm]
+      - [0x7D4F90, cpp, Engine/Vfx/Qix/DrawLayer/DrawLayerManager]
+      - [0x7D6340, cpp, Engine/Vfx/Qix/Thread/EffectThread]
+      - [0x7D6700, asm]
+      - [0x7D6730, cpp, Engine/Vfx/Qix/ExResource/ExResourceManager]
+      - [0x7D9B90, cpp, Engine/Vfx/Qix/Control/AbstractLeafColorRGBA]
+      - [0x7DA020, cpp, Engine/Vfx/Qix/Control/AbstractLeafMatrix]
+      - [0x7DA310, asm]
+      - [0x7E7DC0, cpp, Engine/Vfx/Qix/Data/ShaderParameterHint_Data]
+      - [0x7E8100, cpp, Engine/Vfx/Qix/Graph/SureGenesisBuffer]
+      - [0x7E8380, cpp, Engine/Vfx/Qix/Graph/RingGenesisBuffer]
+      - [0x7E86F0, asm]
+      - [0x7F7F50, cpp, Engine/Vfx/Qix/Graph/BaseGenesisBuffer]
+      - [0x7F82D0, asm]
+      - [0x85BEE0, cpp, Engine/Dw/Renderer/VarianceDepthDrawShaderDriver]
+      - [0x85C230, asm]
+      - [0x8644D0, cpp, Engine/Dw/Renderer/DepthDrawShaderDriver]
+      - [0x864840, cpp, Engine/Dw/Renderer/FlatColorShaderDriver]
+      - [0x864AD0, asm]
+      - [0x866150, cpp, Engine/Dw/Renderer/shaderDriver/PRTShaderDriver]
+      - [0x8664D0, cpp, Engine/Dw/Renderer/shaderDriver/ZPixelClipShaderDriver]
+      - [0x866660, asm]
+      - [0x867B00, cpp, Engine/Dw/Renderer/shaderDriver/CellShaderDriver]
+      - [0x867D40, cpp, Engine/Dw/Renderer/shaderDriver/DrawEnvCubeBlendShaderDriver]
+      - [0x868030, cpp, Engine/Dw/Renderer/shaderDriver/AlphaOffsetShaderDriver]
+      - [0x868200, asm]
+      - [0x869A30, cpp, Engine/Dw/Renderer/DepthDrawTag]
+      - [0x869BD0, asm]
       - [0x942B40, cpp, Sqex/Socket/SocketWinsock]
       - [0x943460, asm]
       - { start: 0x94DC90, type: lib, name: zlib/deflate, library: build/third_party/zlib/zlibstat.lib, object: deflate.obj }
@@ -331,11 +404,20 @@ segments:
       - [0x9E9E60, asm]
       - [0x9EC760, cpp, Engine/Cut/Plugins/KillClip]
       - [0x9EC8E0, asm]
+      - [0x9F5A50, cpp, Engine/Cut/Plugins/EffectTurnOffClip]
+      - [0x9F5CA0, asm]
+      - [0x9F7CB0, cpp, Engine/Cut/Plugins/WindParamClip]
+      - [0x9F9110, asm]
+      - [0x9FAB10, cpp, Engine/Cut/Scheduler/CalculateRegisterClip]
+      - [0x9FAE60, asm]
+      - [0xA12250, cpp, Engine/Media/Player/Win/DefaultPlayerFactoryWIN]
+      - [0xA123E0, asm]
       - [0xA3B050, cpp, Engine/Vfx/Common/Thread/BaseThread]
       - [0xA3B4A0, asm]
       - [0xA3BE20, cpp, Engine/Vfx/Common/Thread/UnlockCondition]
       - [0xA3C450, cpp, Engine/Vfx/Common/Thread/ThreadManager]
-      - [0xA3C5C0, asm]
+      - [0xA3C5C0, cpp, Engine/Vfx/Common/Camera/BaseCamera]
+      - [0xA3D590, asm]
       - { start: 0xA3FD60, type: lib, name: zlib/uncompr, library: build/third_party/zlib/zlibstat.lib, object: uncompr.obj }
       - [0xA3FE0C, asm]
       - { start: 0xA420C0, type: lib, name: crt/87trigh, library: third_party/crt/libcmt.lib, object: 87trigh.obj }
@@ -364,16 +446,28 @@ segments:
       - [0xA54290, asm]
       - { start: 0xA551B0, type: .text, name: Engine/Vfx/Common/Io/Printer, linker_section: .text$x }
       - { start: 0xA551F0, type: .text, name: Engine/Vfx/Common/Memory/Memory, linker_section: .text$x }
-      - [0xA55230, asm]
+      - { start: 0xA55230, type: .text, name: Engine/Dw/RenderInterface/D3d9/Rapture/MemoryPool, linker_section: .text$x }
+      - [0xA55270, asm]
+      - { start: 0xAEB930, type: .text, name: Engine/Vfx/Qix/DrawLayer/DrawLayerManager, linker_section: .text$x }
+      - [0xAEB95C, asm]
+      - { start: 0xAEB9C0, type: .text, name: Engine/Vfx/Qix/Thread/EffectThread, linker_section: .text$x }
+      - [0xAEB9E4, asm]
+      - { start: 0xAEC1C0, type: .text, name: Engine/Vfx/Qix/Graph/BaseGenesisBuffer, linker_section: .text$x }
+      - [0xAEC1F0, asm]
       - { start: 0xB015C0, type: .text, name: Sqex/Socket/SocketWinsock, linker_section: .text$x }
       - [0xB015F0, asm]
       - { start: 0xB04F40, type: .text, name: Engine/Cut/Plugins/ScheduleActor, linker_section: .text$x }
       - [0xB04FD0, asm]
       - { start: 0xB050B0, type: .text, name: Engine/Cut/Plugins/ScheduleClip, linker_section: .text$x }
       - [0xB050F8, asm]
+      - { start: 0xB05440, type: .text, name: Engine/Cut/Plugins/WindParamClip, linker_section: .text$x }
+      - [0xB054B0, asm]
+      - { start: 0xB05FA0, type: .text, name: Engine/Media/Player/Win/DefaultPlayerFactoryWIN, linker_section: .text$x }
+      - [0xB05FD0, asm]
       - { start: 0xB069A0, type: .text, name: Engine/Vfx/Common/Thread/UnlockCondition, linker_section: .text$x }
       - { start: 0xB069D0, type: .text, name: Engine/Vfx/Common/Thread/ThreadManager, linker_section: .text$x }
-      - [0xB06A00, asm]
+      - { start: 0xB06A00, type: .text, name: Engine/Vfx/Common/Camera/BaseCamera, linker_section: .text$x }
+      - [0xB06A60, asm]
 
   - name: mssmixer
     type: code
@@ -393,15 +487,19 @@ segments:
       - [0xB565FC, rdata]
       - { start: 0xB5662C, type: .rdata, name: Engine/Memory/modules/ComplexLink }
       - [0xB566F8, rdata]
+      - [0xB570C8, .rdata, Engine/CDevVfx/Common/Memory/Malloc]
       - { start: 0xB573F4, type: .rdata, name: Engine/Vfx/Common/Io/Printer }
       - { start: 0xB57674, type: .rdata, name: Engine/Vfx/Common/Memory/MemoryMap }
       - { start: 0xB576B0, type: .rdata, name: Engine/Vfx/Common/Map/BaseMap }
       - { start: 0xB57878, type: .rdata, name: Engine/Vfx/Common/Map/UsIntMap }
-      - [0xB5791C, rdata]
+      - [0xB5791C, .rdata, Engine/Dw/RenderInterface/D3d9/Rapture/MemoryPool]
+      - [0xB57B04, rdata]
+      - { start: 0xB598A0, type: .rdata, name: crt/ldexp }
+      - [0xB598A8, rdata]
       - { start: 0xB68074, type: .rdata, name: openssl/rsa_err }
       - [0xB68900, rdata]
       - { start: 0xB68958, type: .rdata, name: openssl/p_verify }
-      - [0xB68970, rdata]
+      - { start: 0xB68970, type: .rdata, name: openssl/m_md5 }
       - { start: 0xB689BC, type: .rdata, name: openssl/p_sign }
       - [0xB689D4, rdata]
       - { start: 0xB69F4C, type: .rdata, name: openssl/x509_obj }
@@ -409,7 +507,8 @@ segments:
       - { start: 0xB79184, type: .rdata, name: openssl/eng_init }
       - [0xB791A0, rdata]
       - { start: 0xB79308, type: .rdata, name: openssl/rsa_sign }
-      - [0xB79358, rdata]
+      - { start: 0xB79358, type: .rdata, name: openssl/md5_dgst }
+      - [0xB79380, rdata]
       - { start: 0xB794C8, type: .rdata, name: openssl/obj_lib }
       - [0xB794E4, rdata]
       - { start: 0xB79560, type: .rdata, name: openssl/v3_alt }
@@ -471,8 +570,13 @@ segments:
       - [0xC862D8, rdata]
       - { start: 0xC86330, type: .rdata, name: crt/modf_pentium4 }
       - [0xC86370, rdata]
+      - { start: 0xC86658, type: lib, name: crt/ctype, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/ctype.obj, linker_section: .rdata }
+      - [0xC86E60, rdata]
       - { start: 0xC86EF4, type: .rdata, name: crt/gs_report }
       - [0xC86EFC, rdata]
+      - { start: 0xC87DF0, type: .rdata, name: crt/output }
+      - { start: 0xC87E60, type: .rdata, name: crt/outputs }
+      - [0xC87EBC, rdata]
       - { start: 0xC87EC0, type: .rdata, name: crt/cos_pentium4 }
       - { start: 0xC88770, type: .rdata, name: crt/common }
       - { start: 0xC887C0, type: .rdata, name: crt/sin_pentium4 }
@@ -481,14 +585,51 @@ segments:
       - { start: 0xC8AAB4, type: .rdata, name: crt/tzset }
       - { start: 0xC8AAB8, type: .rdata, name: crt/timeset }
       - [0xC8AAF8, rdata]
+      - { start: 0xC8AB70, type: .rdata, name: crt/fpexcept }
+      - [0xC8AB9C, rdata]
+      - { start: 0xC8ABA4, type: .rdata, name: crt/fpexcept }
+      - [0xC8ABC8, rdata]
       - { start: 0xC8ABD0, type: .rdata, name: crt/atan_pentium4 }
       - { start: 0xC8AD20, type: .rdata, name: crt/acos_pentium4 }
-      - [0xC8C540, rdata]
+      - { start: 0xC8C540, type: .rdata, name: crt/87cdisp }
+      - { start: 0xC8C570, type: .rdata, name: crt/fpexcept }
+      - [0xC8C5E8, rdata]
       - { start: 0xC8C5F0, type: .rdata, name: crt/log10_pentium4 }
       - { start: 0xC8CF10, type: .rdata, name: crt/pow_pentium4 }
       - [0xC90850, rdata]
       - { start: 0xC91450, type: lib, name: crt/atan_table, library: third_party/crt/libcmt.lib, object: atan_table.obj, linker_section: .rdata }
       - [0xC92C60, rdata]
+      - [0xC99E10, .rdata, Engine/Dw/SceneGraph/Resource/ReferencedResourceNodeFactory]
+      - [0xC99EC4, rdata]
+      - [0xCC6E28, .rdata, Engine/Vfx/Qix/Data/UnitInstance_Data]
+      - [0xCC6F90, rdata]
+      - [0xCC722C, .rdata, Engine/Vfx/Qix/Data/ControlInstance_Data]
+      - [0xCC73DC, rdata]
+      - [0xCC7C40, .rdata, Engine/Vfx/Qix/DrawLayer/DrawLayerManager]
+      - [0xCC7CFC, rdata]
+      - [0xCC7F68, .rdata, Engine/Vfx/Qix/Thread/EffectThread]
+      - [0xCC8010, rdata]
+      - [0xCCA0F8, .rdata, Engine/Vfx/Qix/Control/AbstractLeafColorRGBA]
+      - [0xCCA1E0, .rdata, Engine/Vfx/Qix/Control/AbstractLeafMatrix]
+      - [0xCCA2A8, rdata]
+      - [0xCCEE58, .rdata, Engine/Vfx/Qix/Data/ShaderParameterHint_Data]
+      - [0xCCEE7C, rdata]
+      - [0xCCEF00, .rdata, Engine/Vfx/Qix/Data/ShaderParameterHint_Data]
+      - [0xCCEF50, .rdata, Engine/Vfx/Qix/Graph/SureGenesisBuffer]
+      - [0xCCF024, .rdata, Engine/Vfx/Qix/Graph/RingGenesisBuffer]
+      - [0xCCF0E8, rdata]
+      - [0xCD0E50, .rdata, Engine/Vfx/Qix/Graph/BaseGenesisBuffer]
+      - [0xCD0F88, rdata]
+      - [0xCF6A80, .rdata, Engine/Dw/Renderer/VarianceDepthDrawShaderDriver]
+      - [0xCF6AE8, rdata]
+      - [0xCF7C00, .rdata, Engine/Dw/Renderer/DepthDrawShaderDriver]
+      - [0xCF7F00, rdata]
+      - [0xCF7FA0, .rdata, Engine/Dw/Renderer/FlatColorShaderDriver]
+      - [0xCF8050, rdata]
+      - [0xCF87DC, .rdata, Engine/Dw/Renderer/shaderDriver/PRTShaderDriver]
+      - [0xCF8804, rdata]
+      - [0xCF8F40, .rdata, Engine/Dw/Renderer/shaderDriver/AlphaOffsetShaderDriver]
+      - [0xCF8F80, rdata]
       - { start: 0xD13148, type: .rdata, name: Sqex/Socket/SocketWinsock }
       - [0xD132D4, rdata]
       - { start: 0xD13730, type: .rdata, name: zlib/deflate }
@@ -523,11 +664,21 @@ segments:
       - [0xD34BAC, rdata]
       - { start: 0xD357F0, type: .rdata, name: Engine/Cut/Plugins/KillClip }
       - [0xD35844, rdata]
+      - [0xD38F40, .rdata, Engine/Cut/Plugins/EffectTurnOffClip]
+      - [0xD39114, rdata]
+      - [0xD39E1C, .rdata, Engine/Cut/Plugins/WindParamClip]
+      - [0xD39ED8, rdata]
+      - [0xD3A718, .rdata, Engine/Cut/Scheduler/CalculateRegisterClip]
+      - [0xD3A918, rdata]
+      - [0xD3BFD4, .rdata, Engine/Media/Player/Win/DefaultPlayerFactoryWIN]
+      - [0xD3C05C, rdata]
       - { start: 0xD3DE28, type: .rdata, name: Engine/Vfx/Common/Thread/BaseThread }
       - [0xD3DEC4, rdata]
       - { start: 0xD3E028, type: .rdata, name: Engine/Vfx/Common/Thread/UnlockCondition }
       - { start: 0xD3E138, type: .rdata, name: Engine/Vfx/Common/Thread/ThreadManager }
       - [0xD3E188, rdata]
+      - { start: 0xD3E190, type: .rdata, name: Engine/Vfx/Common/Camera/BaseCamera }
+      - [0xD3E260, rdata]
       - { start: 0xD3EE2C, type: .rdata, name: Engine/Memory/modules/SystemHeap, linker_section: .rdata$r }
       - { start: 0xD3EE78, type: .rdata, name: Engine/Memory/modules/ComplexLink, linker_section: .rdata$r }
       - [0xD3EEC4, rdata]
@@ -536,20 +687,46 @@ segments:
       - { start: 0xD3FD28, type: .rdata, name: Engine/Vfx/Common/Map/BaseMap, linker_section: .rdata$r }
       - { start: 0xD3FD3C, type: .rdata, name: Engine/Vfx/Common/Map/UsIntMap, linker_section: .rdata$r }
       - [0xD3FD50, rdata]
+      - { start: 0xD96AFC, type: .rdata, name: Engine/Vfx/Qix/Thread/EffectThread, linker_section: .rdata$r }
+      - [0xD96B8C, rdata]
+      - { start: 0xD97AF4, type: .rdata, name: Engine/Vfx/Qix/Graph/SureGenesisBuffer, linker_section: .rdata$r }
+      - { start: 0xD97BC0, type: .rdata, name: Engine/Vfx/Qix/Graph/RingGenesisBuffer, linker_section: .rdata$r }
+      - [0xD97C18, rdata]
+      - { start: 0xD98158, type: .rdata, name: Engine/Vfx/Qix/Graph/BaseGenesisBuffer, linker_section: .rdata$r }
+      - [0xD98180, rdata]
+      - { start: 0xD9AB00, type: .rdata, name: Engine/Dw/Renderer/VarianceDepthDrawShaderDriver, linker_section: .rdata$r }
+      - [0xD9AB50, rdata]
+      - { start: 0xD9ACD0, type: .rdata, name: Engine/Dw/Renderer/DepthDrawShaderDriver, linker_section: .rdata$r }
+      - { start: 0xD9AD20, type: .rdata, name: Engine/Dw/Renderer/FlatColorShaderDriver, linker_section: .rdata$r }
+      - [0xD9AD70, rdata]
+      - { start: 0xD9ADC0, type: .rdata, name: Engine/Dw/Renderer/shaderDriver/CellShaderDriver, linker_section: .rdata$r }
+      - { start: 0xD9AE10, type: .rdata, name: Engine/Dw/Renderer/shaderDriver/DrawEnvCubeBlendShaderDriver, linker_section: .rdata$r }
+      - { start: 0xD9AE60, type: .rdata, name: Engine/Dw/Renderer/shaderDriver/AlphaOffsetShaderDriver, linker_section: .rdata$r }
+      - [0xD9AEB0, rdata]
       - { start: 0xDA34B8, type: .rdata, name: Engine/Cut/Plugins/ScheduleActor, linker_section: .rdata$r }
       - [0xDA3564, rdata]
       - { start: 0xDA3ACC, type: .rdata, name: Engine/Cut/Plugins/ScheduleClip, linker_section: .rdata$r }
       - [0xDA3BB8, rdata]
       - { start: 0xDA41A0, type: .rdata, name: Engine/Cut/Plugins/KillClip, linker_section: .rdata$r }
       - [0xDA428C, rdata]
+      - { start: 0xDA6318, type: .rdata, name: Engine/Cut/Plugins/EffectTurnOffClip, linker_section: .rdata$r }
+      - [0xDA6404, rdata]
+      - { start: 0xDA6BE0, type: .rdata, name: Engine/Cut/Plugins/WindParamClip, linker_section: .rdata$r }
+      - [0xDA6C30, rdata]
+      - { start: 0xDA6CF8, type: .rdata, name: Engine/Cut/Scheduler/CalculateRegisterClip, linker_section: .rdata$r }
+      - [0xDA6DE4, rdata]
       - { start: 0xDA8730, type: .rdata, name: Engine/Vfx/Common/Thread/BaseThread, linker_section: .rdata$r }
       - [0xDA8780, rdata]
       - { start: 0xDA88B4, type: .rdata, name: Engine/Vfx/Common/Thread/UnlockCondition, linker_section: .rdata$r }
       - { start: 0xDA8908, type: .rdata, name: Engine/Vfx/Common/Thread/ThreadManager, linker_section: .rdata$r }
-      - [0xDA891C, rdata]
+      - { start: 0xDA891C, type: .rdata, name: Engine/Vfx/Common/Camera/BaseCamera, linker_section: .rdata$r }
+      - [0xDA8930, rdata]
       - { start: 0xDA9F00, type: .rdata, name: Engine/Vfx/Common/Io/Printer, linker_section: .xdata$x }
       - { start: 0xDA9F58, type: .rdata, name: Engine/Vfx/Common/Memory/Memory, linker_section: .xdata$x }
-      - [0xDA9FB0, rdata]
+      - { start: 0xDA9FB0, type: .rdata, name: Engine/Dw/RenderInterface/D3d9/Rapture/MemoryPool, linker_section: .xdata$x }
+      - [0xDAA094, rdata]
+      - { start: 0xE2CDC0, type: .rdata, name: crt/malloc, linker_section: .xdata$x }
+      - [0xE2CDDC, rdata]
       - { start: 0xE2CDE0, type: .rdata, name: crt/free, linker_section: .xdata$x }
       - { start: 0xE2CE00, type: .rdata, name: crt/ehvecctr, linker_section: .xdata$x }
       - [0xE2CE1C, rdata]
@@ -563,8 +740,22 @@ segments:
       - [0xE2CFA4, rdata]
       - { start: 0xE2CFA8, type: .rdata, name: crt/realloc, linker_section: .xdata$x }
       - [0xE2CFC4, rdata]
+      - { start: 0xE2D068, type: .rdata, name: crt/setmode, linker_section: .xdata$x }
+      - [0xE2D084, rdata]
       - { start: 0xE2D668, type: .rdata, name: crt/tzset, linker_section: .xdata$x }
       - [0xE2D6C4, rdata]
+      - { start: 0xE2D6C8, type: .rdata, name: crt/fpctrl, linker_section: .xdata$x }
+      - [0xE2D6E4, rdata]
+      - { start: 0xE2D788, type: .rdata, name: crt/lseeki64, linker_section: .xdata$x }
+      - [0xE2D7A4, rdata]
+      - { start: 0xE2D7A8, type: .rdata, name: crt/printf, linker_section: .xdata$x }
+      - [0xE2D7C4, rdata]
+      - { start: 0xE44D78, type: .rdata, name: Engine/Vfx/Qix/DrawLayer/DrawLayerManager, linker_section: .xdata$x }
+      - [0xE44DAC, rdata]
+      - { start: 0xE44EF0, type: .rdata, name: Engine/Vfx/Qix/Thread/EffectThread, linker_section: .xdata$x }
+      - [0xE44F48, rdata]
+      - { start: 0xE4592C, type: .rdata, name: Engine/Vfx/Qix/Graph/BaseGenesisBuffer, linker_section: .xdata$x }
+      - [0xE45984, rdata]
       - { start: 0xE5B894, type: .rdata, name: Sqex/Socket/SocketWinsock, linker_section: .xdata$x }
       - [0xE5B914, rdata]
       - { start: 0xE5F0B8, type: .rdata, name: crt/threadex, linker_section: .xdata$x }
@@ -575,11 +766,16 @@ segments:
       - [0xE5F300, rdata]
       - { start: 0xE5F430, type: .rdata, name: Engine/Cut/Plugins/ScheduleClip, linker_section: .xdata$x }
       - [0xE5F4A0, rdata]
+      - { start: 0xE5F924, type: .rdata, name: Engine/Cut/Plugins/WindParamClip, linker_section: .xdata$x }
+      - [0xE5F9AC, rdata]
+      - { start: 0xE60C74, type: .rdata, name: Engine/Media/Player/Win/DefaultPlayerFactoryWIN, linker_section: .xdata$x }
+      - [0xE60CA8, rdata]
       - { start: 0xE61A50, type: .rdata, name: Engine/Vfx/Common/Thread/BaseThread, linker_section: .xdata$x }
       - [0xE61A5C, rdata]
       - { start: 0xE61AB4, type: .rdata, name: Engine/Vfx/Common/Thread/UnlockCondition, linker_section: .xdata$x }
       - { start: 0xE61AE0, type: .rdata, name: Engine/Vfx/Common/Thread/ThreadManager, linker_section: .xdata$x }
-      - [0xE61B0C, rdata]
+      - { start: 0xE61B0C, type: .rdata, name: Engine/Vfx/Common/Camera/BaseCamera, linker_section: .xdata$x }
+      - [0xE61BBC, rdata]
 
   - name: data
     type: code
@@ -608,12 +804,21 @@ segments:
       - { start: 0xEEAD50, type: .data, name: crt/atan }
       - { start: 0xEEAD60, type: .data, name: crt/acos }
       - { start: 0xEEAD70, type: .data, name: crt/87fmod }
-      - [0xEEADC0, data]
+      - { start: 0xEEADC0, type: .data, name: crt/sqrt }
+      - [0xEEADC8, data]
       - { start: 0xEEADD0, type: .data, name: crt/log10 }
       - { start: 0xEEADE0, type: .data, name: crt/pow }
       - [0xEEADEC, data]
+      - { start: 0xEEAE74, type: .data, name: crt/ctype }
+      - [0xEEAE7C, data]
       - { start: 0xEEB3E0, type: lib, name: crt/glstatus, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/glstatus.obj, linker_section: .data }
       - [0xEEB3E4, data]
+      - { start: 0xEEB518, type: .data, name: crt/heapinit }
+      - [0xEEB51C, data]
+      - { start: 0xEEB7B8, type: lib, name: crt/nlsdata1, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/nlsdata1.obj, linker_section: .data }
+      - [0xEEB7C4, data]
+      - { start: 0xEEB850, type: .data, name: crt/output }
+      - [0xEEB858, data]
       - { start: 0xEEB860, type: .data, name: crt/87disp }
       - [0xEEB88C, data]
       - { start: 0xEEBA44, type: .data, name: crt/tzset }
@@ -623,12 +828,35 @@ segments:
       - { start: 0xEEBB00, type: lib, name: crt/days, library: third_party/crt/libcmt.lib, object: days.obj, linker_section: .data }
       - [0xEEBB68, data]
       - { start: 0xEEBB80, type: .data, name: crt/87triga }
-      - [0xEEBBD0, data]
+      - { start: 0xEEBBD0, type: .data, name: crt/util }
+      - { start: 0xEEBBF8, type: .data, name: crt/fpexcept }
+      - { start: 0xEEBCE0, type: .data, name: crt/fpctrl }
+      - [0xEEBCFC, data]
       - { start: 0xEEBD00, type: .data, name: crt/adj_fdiv }
       - { start: 0xEEBE60, type: .data, name: crt/87tran }
       - [0xEEBEBC, data]
+      - { start: 0xEEBED0, type: lib, name: crt/huge, library: third_party/crt/libcmt.lib, object: huge.obj, linker_section: .data }
+      - [0xEEBED8, data]
+      - { start: 0xEEBFA4, type: lib, name: crt/matherr, library: third_party/crt/libcmt.lib, object: matherr.obj, linker_section: .data }
+      - [0xEEBFA8, data]
       - { start: 0xEEBFD8, type: lib, name: crt/constpow, library: third_party/crt/libcmt.lib, object: constpow.obj, linker_section: .data }
       - [0xEEC294, data]
+      - [0xF03F78, .data, Engine/Vfx/Qix/DrawLayer/DrawLayerManager]
+      - [0xF03F7C, data]
+      - [0xF04128, .data, Engine/Vfx/Qix/Thread/EffectThread]
+      - [0xF041A0, data]
+      - [0xF06CD0, .data, Engine/Vfx/Qix/Graph/SureGenesisBuffer]
+      - [0xF06D8C, .data, Engine/Vfx/Qix/Graph/RingGenesisBuffer]
+      - [0xF06DCC, data]
+      - [0xF0A048, .data, Engine/Dw/Renderer/VarianceDepthDrawShaderDriver]
+      - [0xF0A094, data]
+      - [0xF0A1E0, .data, Engine/Dw/Renderer/DepthDrawShaderDriver]
+      - [0xF0A228, .data, Engine/Dw/Renderer/FlatColorShaderDriver]
+      - [0xF0A270, data]
+      - [0xF0A2C0, .data, Engine/Dw/Renderer/shaderDriver/CellShaderDriver]
+      - [0xF0A310, .data, Engine/Dw/Renderer/shaderDriver/DrawEnvCubeBlendShaderDriver]
+      - [0xF0A368, .data, Engine/Dw/Renderer/shaderDriver/AlphaOffsetShaderDriver]
+      - [0xF0A3B8, data]
       - { start: 0xF0F458, type: .data, name: zlib/trees }
       - { start: 0xF0F494, type: .data, name: zlib/gvmat32c }
       - { start: 0xF0F4A0, type: .data, name: zlib/inffas32 }
@@ -642,6 +870,10 @@ segments:
       - [0xF1E5F8, data]
       - { start: 0xF1E9B8, type: .data, name: Engine/Cut/Plugins/KillClip }
       - [0xF1EA58, data]
+      - [0xF202FC, .data, Engine/Cut/Plugins/EffectTurnOffClip]
+      - [0xF203B8, data]
+      - [0xF209D8, .data, Engine/Cut/Scheduler/CalculateRegisterClip]
+      - [0xF20A9C, data]
       - { start: 0xF220A8, type: .data, name: Engine/Vfx/Common/Thread/BaseThread }
       - [0xF220E4, data]
       - { start: 0xF221E8, type: .data, name: Engine/Vfx/Common/Thread/UnlockCondition }
@@ -656,6 +888,7 @@ segments:
     bss_size: 0x58940
     subsegments:
       - { type: bss, vram: 0x1324000 }
+      - { type: .bss, vram: 0x1328088, name: Engine/CDevVfx/Common/Memory/Malloc }
       - { type: .bss, vram: 0x1328090, name: Engine/Vfx/Common/Io/Printer }
       - { type: bss, vram: 0x1328130 }
       - { type: .bss, vram: 0x1328D50, name: Engine/Vfx/Common/Memory/Memory }
@@ -664,10 +897,22 @@ segments:
       - { type: bss, vram: 0x1363F20 }
       - { type: .bss, vram: 0x1363FD0, name: crt/gs_report }
       - { type: bss, vram: 0x13642F4 }
+      - { type: .bss, vram: 0x1364330, name: crt/heapinit }
+      - { type: bss, vram: 0x1364334 }
       - { type: lib, vram: 0x13648C4, name: crt/_newmode, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/_newmode.obj, linker_section: .bss }
       - { type: bss, vram: 0x13648C8 }
       - { type: .bss, vram: 0x13648D0, name: crt/tzset }
-      - { type: bss, vram: 0x1364988 }
+      - { type: lib, vram: 0x1364988, name: crt/txtmode, library: third_party/crt/libcmt.lib, object: build/intel/mt_obj/txtmode.obj, linker_section: .bss }
+      - { type: bss, vram: 0x136498C }
+      - { type: lib, vram: 0x13649E4, name: crt/ncommode, library: third_party/crt/libcmt.lib, object: ncommode.obj, linker_section: .bss }
+      - { type: bss, vram: 0x13649E8 }
+      - { type: .bss, vram: 0x1364A04, name: crt/printf }
+      - { type: bss, vram: 0x1364A08 }
+      - { type: .bss, vram: 0x1374E70, name: Engine/Dw/Renderer/VarianceDepthDrawShaderDriver }
+      - { type: bss, vram: 0x1374E74 }
+      - { type: .bss, vram: 0x1374E7C, name: Engine/Dw/Renderer/DepthDrawShaderDriver }
+      - { type: .bss, vram: 0x1374E80, name: Engine/Dw/Renderer/FlatColorShaderDriver }
+      - { type: bss, vram: 0x1374E84 }
       - { type: .bss, vram: 0x137B338, name: crt/eh3valid }
       - { type: bss, vram: 0x137B45C }
       - { type: .bss, vram: 0x137B718, name: Engine/Vfx/Common/Thread/BaseThread }

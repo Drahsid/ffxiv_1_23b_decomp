@@ -124,6 +124,10 @@ void Printer::func_00415650(s32 type, u8 level, const char* text) {
 } // namespace CDev
 } // namespace SQEX
 
+static void Default_Assert_Handler(const char* expression, const char* message, const char* file, s32 line, const char* function) {
+    LOG_ASSERT_FAILURE(expression, message, file, line, function);
+}
+
 #include "Engine/Common/Assert.h"
 
 namespace SQEX {

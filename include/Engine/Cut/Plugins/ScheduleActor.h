@@ -14,7 +14,6 @@ namespace Cut {
 namespace Scheduler {
 class ClipBase;
 class ClipParameter;
-class Scheduler;
 } // namespace Scheduler
 
 namespace Plugins {

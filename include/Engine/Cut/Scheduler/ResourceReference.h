@@ -1,7 +1,7 @@
 #ifndef ENGINE_CUT_SCHEDULER_RESOURCE_REFERENCE_H
 #define ENGINE_CUT_SCHEDULER_RESOURCE_REFERENCE_H
 
-#include "Engine/Cut/Scheduler/ClipBase.h"
+#include "Engine/Cut/Common/CutSceneObject.h"
 #include "types.h"
 
 namespace SQEX {

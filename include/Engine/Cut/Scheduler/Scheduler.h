@@ -2,8 +2,9 @@
 #define ENGINE_CUT_SCHEDULER_SCHEDULER_H
 
 #include "Engine/Cut/Common/CutSceneMemoryObject.h"
-#include "Engine/Cut/Scheduler/ClipBase.h"
+#include "Engine/Common/ISceneObject.h"
 #include "Engine/Cut/Scheduler/Float4.h"
+#include "Engine/Cut/Scheduler/ScheduleRegister.h"
 #include "types.h"
 
 namespace SQEX {
@@ -53,6 +54,7 @@ public:
     virtual void func_00A1F0C0();
 
     void Execute();
+    const char* func_00A1B700(u32 index);
     const u32* func_00A1B7F0();
     void func_00A1B7D0(u32 arg0);
     bool func_00A1BC60(void* arg0);
@@ -72,7 +74,7 @@ public:
     u32 unk_94[9];
     CutScenePlayer::CutSceneObject* unk_B8;
     u32 unk_BC[13];
-    u32 unk_F0[49];
+    ScheduleRegister registers;
     u32 unk_1B4;
 };
 

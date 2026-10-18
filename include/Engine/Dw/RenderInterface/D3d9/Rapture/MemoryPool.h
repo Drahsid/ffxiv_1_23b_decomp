@@ -19,11 +19,21 @@ public:
         u32 size;
     };
 
-    static u32 func_00417640(u32 value, u32 shift);
+    static u32 Get_Alignment_Padding(u32 value, u32 shift) {
+        u32 negated = ~value + 1;
+        return ((negated >> shift) << shift) ^ negated;
+    }
 
-    bool func_00417680();
-    void func_004176B0();
-    u32 func_004176E0();
+    bool Has_Pools();
+    void Reset();
+    u32 Get_Used_Size();
+
+    void Initialize(u32 size);
+    void ChangeUsePool();
+    void* Allocate_And_Copy(const void* source, u32 size);
+    void* Allocate(u32 size);
+    void* Allocate_Aligned_And_Copy(const void* source, u32 size, u32 alignment_shift);
+    void* Allocate_Aligned(u32 size, u32 alignment_shift);
 
     MemoryPool();
     ~MemoryPool();

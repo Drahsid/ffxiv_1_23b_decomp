@@ -19,7 +19,7 @@ public:
     virtual void* func_00AB7340();
     virtual IScheduleActor* func_00A206A0();
     virtual void func_00A205D0(void* arg0);
-    virtual void Bind(IScheduleActor* pActor);
+    virtual void Bind(IScheduleActor* actor);
     virtual void func_00A20640(void* arg0);
     virtual void func_00A205F0(IScheduleActor* arg0);
     virtual u32 func_00A20800();

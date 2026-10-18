@@ -72,7 +72,12 @@ s32 UsIntMap::CompareKey_(const void* arg0, const void* arg1) {
 }
 
 void UsIntMap::func_00416DF0() {
-    Io::func_00415F70(Io::Printer::func_00415C90(), "[UsIntMap] debug print start.  (%d / %d) ---------", static_cast<s32>(count), static_cast<s32>(capacity));
+    Io::func_00415F70(
+        Io::Printer::func_00415C90(),
+        "[UsIntMap] debug print start.  (%d / %d) ---------",
+        static_cast<s32>(count),
+        static_cast<s32>(capacity)
+    );
     u32* record = reinterpret_cast<u32*>(records);
     if (record) {
         for (u32 index = 0; index < count; index++) {

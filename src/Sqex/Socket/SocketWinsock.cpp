@@ -25,7 +25,6 @@ s32 SocketWinsock::Recv_From(char* arg0, s32 arg1, sockaddr* arg2, s32* arg3) {
     if (result == SOCKET_ERROR) {
         switch (WSAGetLastError()) {
         case WSAEWOULDBLOCK:
-            return -1;
         case WSAECONNRESET:
             return -1;
         }

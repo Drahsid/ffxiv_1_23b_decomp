@@ -2,37 +2,13 @@
 #define ENGINE_CUT_SCHEDULER_CLIP_BASE_H
 
 #include "types.h"
+#include "Engine/Cut/Common/CutSceneObject.h"
+#include "Engine/Common/Misc/NonCopyable.h"
+#include "Engine/Common/ISceneObject.h"
 
 namespace SQEX {
 namespace CDev {
 namespace Engine {
-
-namespace Common {
-
-namespace Misc {
-class NonCopyable {
-protected:
-    NonCopyable() {
-    }
-
-private:
-    NonCopyable(const NonCopyable&);
-    NonCopyable& operator=(const NonCopyable&);
-};
-} // namespace Misc
-
-class ISceneObject {
-public:
-    class IActorListener;
-    class IScheduleDataTransfer;
-
-    class IClip {
-    public:
-        virtual ~IClip();
-    };
-};
-
-} // namespace Common
 
 namespace Cut {
 
@@ -41,9 +17,6 @@ class IClipListenerHolder;
 } // namespace Plugins
 
 namespace Common {
-
-class CutSceneObject {
-};
 
 template<class T>
 class ListNode {
@@ -89,7 +62,7 @@ public:
     virtual s32 func_00A210E0();
     virtual void func_00A210F0(u32 arg0);
     virtual u32 func_00A21100();
-    virtual void func_00A21110(s16 arg0);
+    virtual void func_00A21110(s32 arg0);
     virtual s32 func_00A21120();
     virtual const void* func_00A21130();
     virtual void func_00776340(u32 arg0);
@@ -105,6 +78,18 @@ public:
     virtual s32 func_00A211D0();
     virtual void* func_00A21230();
     virtual const void* GetData() = 0;
+    virtual bool func_00B73290();
+    virtual bool func_0080FA00(u32 arg0);
+    virtual u32 func_00A21250();
+    virtual void func_006CE2E0_84();
+    virtual void func_006CE2E0_88();
+    virtual bool func_005C5C80();
+    virtual const void* func_00AB7340();
+    virtual const void* func_00A21040(ClipParameter* parameter);
+    virtual void func_00A21090(u32 arg0);
+    virtual u32 func_00A210B0();
+    virtual void* func_00A210C0();
+    virtual u32 func_00A21220();
 
     static void operator delete(void* memory) {
     }

@@ -131,7 +131,7 @@ void ScheduleClip::OnEnter(Scheduler::ClipParameter* parameter) {
             index++;
         }
     }
-    
+
     scheduler->func_00A1CE70(Scheduler::Float4(static_cast<Scheduler::Scheduler*>(func_00A21230())->func_00A1C040()));
     scheduler->func_00A1CE20(Scheduler::Float4(static_cast<Scheduler::Scheduler*>(func_00A21230())->func_00A1C030()));
     func_00A210F0(2);
@@ -142,4 +142,3 @@ void ScheduleClip::OnEnter(Scheduler::ClipParameter* parameter) {
 } // namespace Engine
 } // namespace CDev
 } // namespace SQEX
-
